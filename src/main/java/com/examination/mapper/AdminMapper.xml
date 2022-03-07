@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.examination.mapper.AdminMapper">
+
+    <select id="findAll" resultType="com.examination.entity.Admin">
+        select * from admin
+    </select>
+
+    <delete id="deleteById" parameterType="Integer">
+        delete from admin where adminId = #{adminId}
+    </delete>
+
+    <update id="update" parameterType="com.examination.entity.Admin">
+        update admin set adminName = #{adminName},
+                         sex = #{sex},
+                         tel = #{tel},
+                         email = #{email},
+                         pwd = #{pwd},
+                         cardId = #{cardId},
+                         role = #{role}
+        where adminId = #{adminId}
+    </update>
+
+    <update id="updatePwd">
+        update admin set pwd = #{pwd} where adminId = #{adminId}
+    </update>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="adminId" parameterType="com.examination.entity.Admin">
+        insert into admin(adminName,sex,tel,email,pwd,cardId,role)
+        values(#{adminName},#{sex},#{tel},#{email},#{pwd},#{cardId},#{role})
+    </insert>
+
+</mapper>

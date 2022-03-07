@@ -11,7 +11,7 @@
     <!--typeAliases配置别名-->
     <typeAliases>
         <!--扫描包下所有类，取别名，别名默认是类名的小写字母-->
-        <package name="com.czxy.mybatis.model"/>
+        <package name="com.examination.entity"/>
     </typeAliases>
 
     <environments default="development">
@@ -40,7 +40,6 @@
     <!--映射器-->
     <mappers>
         <!--扫描接口-->
-        <package name="com.onlineexamsystem.mapper"/>
+        <package name="com.examination.mapper"/>
     </mappers>
 </configuration>
-

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.examination.mapper.StudentMapper">
+    <resultMap id="BaseResultMap" type="com.examination.entity.Student">
+        <id column="studentId" property="studentId" />
+        <result column="studentName" property="studentName" />
+        <result column="grade" property="grade" />
+        <result column="major" property="major" />
+        <result column="clazz" property="clazz" />
+        <result column="institute" property="institute" />
+        <result column="email" property="email" />
+        <result column="pwd" property="pwd" />
+        <result column="cardId" property="cardId" />
+        <result column="sex" property="sex" />
+        <result column="role" property="role" />
+        <result column="tel" property="tel" />
+    </resultMap>
+    <select id="findAll" resultMap="BaseResultMap">
+        select * from student
+    </select>
+
+    <select id="findById" resultType="com.examination.entity.Student">
+        select * from student where studentId = #{studentId}
+    </select>
+
+    <delete id="deleteById" parameterType="Integer">
+        delete from student where studentId = #{studentId}
+    </delete>
+
+    <update id="update" parameterType="com.examination.entity.Student">
+        update student set studentName = #{studentName},
+                           grade = #{grade},
+                           major = #{major},
+                           clazz = #{clazz},
+                           institute = #{institute},
+                           tel = #{tel},
+                           email = #{email},
+                           pwd = #{pwd},
+                           cardId = #{cardId},
+                           sex = #{sex},
+                           role = #{role}
+        where studentId = #{studentId}
+    </update>
+
+    <update id="updatePwd">
+        update student set pwd = #{pwd} where studentId = #{studentId}
+    </update>
+
+    <insert id="add" parameterType="com.examination.mapper.StudentMapper" keyProperty="studentId" useGeneratedKeys="true">
+        insert into student(studentName,grade,major,clazz,institute,tel,email,pwd,cardId,sex,role)
+        values (#{studentName},#{grade},#{major},#{clazz},#{institute},#{tel},#{email},#{pwd},#{cardId},#{sex},#{role})
+    </insert>
+
+
+
+</mapper>
