@@ -1,38 +1,49 @@
 package com.examination.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
-
-/**
- * 考试管理类
- */
 @Data
+@ApiModel("考试管理类")
 public class ExamManage {
-    //考试编号
+
+    @ApiModelProperty(name = "examCode",value = "考试编号",position = 1)
     private Integer examCode;
-    //考试描述
+
+    @ApiModelProperty(name = "description",value = "考试描述",position = 2)
     private String description;
-    //试题来源
+
+    @ApiModelProperty(name = "source",value = "试题来源",position = 3)
     private String source;
-    //试卷编号
+
+    @ApiModelProperty(name = "paperId",value = "试卷编号",position = 4)
     private Integer paperId;
-    //考试时间
-    private Date examDate;
-    //考试时长
+
+    @ApiModelProperty(name = "examDate",value = "考试时间",position = 5)
+    private String examDate;
+
+    @ApiModelProperty(name = "totalTime",value = "考试时长",position = 6)
     private Integer totalTime;
-    //考试年级
+
+    @ApiModelProperty(name = "grade",value = "年级",position = 7)
     private String grade;
-    //考试学期
+
+    @ApiModelProperty(name = "term",value = "学期",position = 8)
     private String term;
-    //主修专业
+
+    @ApiModelProperty(name = "major",value = "主修专业",position = 9)
     private String major;
-    //发布机构名称
+
+    @ApiModelProperty(name = "institute",value = "学院",position = 10)
     private String institute;
-    //考试总分
+
+    @ApiModelProperty(name = "totalScore",value = "总分",position = 11)
     private Integer totalScore;
-    //考试类型
+
+    @ApiModelProperty(name = "type",value = "考试类型",position = 12)
     private String type;
-    //考试备注
+
+    @ApiModelProperty(name = "tips",value = "备注",position = 13)
     private String tips;
 }
