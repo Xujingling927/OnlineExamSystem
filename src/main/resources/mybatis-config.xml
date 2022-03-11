@@ -7,12 +7,18 @@
     引入属性配置，这里引入数据库的连接属性配置
     -->
     <properties resource="application.yaml"/>
-
     <!--typeAliases配置别名-->
     <typeAliases>
         <!--扫描包下所有类，取别名，别名默认是类名的小写字母-->
         <package name="com.examination.entity"/>
     </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
 
     <environments default="development">
         <environment id="development">
@@ -42,4 +48,7 @@
         <!--扫描接口-->
         <package name="com.examination.mapper"/>
     </mappers>
+
+
+
 </configuration>

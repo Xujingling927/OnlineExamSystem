@@ -57,7 +57,7 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.8.0</version>
+            <version>3.0.0</version>
         </dependency>
 
 <!--        lombok-->
@@ -91,7 +91,15 @@
             <artifactId>log4j-core</artifactId>
             <version>2.17.1</version>
         </dependency>
+<!--        分页插件-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.4.1</version>
+        </dependency>
     </dependencies>
+
+
 
     <build>
         <plugins>

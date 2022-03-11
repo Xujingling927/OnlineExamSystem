@@ -1,4 +1,4 @@
-package com.examination.serviceImpl;
+package com.examination.service.impl;
 
 import com.examination.entity.PaperManage;
 import com.examination.mapper.PaperManageMapper;

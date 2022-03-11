@@ -3,7 +3,7 @@ package com.examination.controller;
 import com.examination.controller.common.BaseController;
 import com.examination.entity.Admin;
 import com.examination.entity.Result;
-import com.examination.serviceImpl.AdminServiceImpl;
+import com.examination.service.impl.AdminServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

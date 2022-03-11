@@ -4,7 +4,9 @@ import com.examination.controller.common.BaseController;
 import com.examination.entity.Result;
 import com.examination.entity.Student;
 import com.examination.service.StudentService;
-import com.examination.serviceImpl.StudentServiceImpl;
+import com.examination.service.impl.StudentServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +21,11 @@ public class StudentController {
     }
 
     @ApiOperation("查询所有学生信息")
+    @ApiImplicitParam(name = "page",value = "当前页数")
     @GetMapping("/students")
-    public Result findAll() {
-        System.out.println(studentService.getClass().getName());
-        return Result.success(studentService.findAll());
+    public Result findAll(@RequestParam("page") Integer page) {
+        PageHelper.startPage(page,10);
+        return Result.success(PageInfo.of(studentService.findAll()));
     }
 
     @ApiOperation("根据学生编号查询")

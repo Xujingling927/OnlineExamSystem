@@ -1,10 +1,14 @@
 package com.examination.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 //( "统一响应结果")
+@ApiModel
 public class Result {
 
     public static Result False = fail("接口未实现",1000);
@@ -12,18 +16,23 @@ public class Result {
     private Map<String,Object> collections;
 
     //(value = "结果说明 true = 成功  false = 失败  ",allowableValues = "true,false",required = true)//参数说明  参数肯定会存在
+    @ApiModelProperty(value = "结果说明 true = 成功  false = 失败  ",allowableValues = "true,false",required = true)
     private boolean status;
 
     //("提示信息")
+    @ApiModelProperty("提示信息")
     private String message;
 
     //("错误信息")
+    @ApiModelProperty("错误信息")
     private String errorMsg;
 
     //("错误代码")
+    @ApiModelProperty("错误代码")
     private int errorCode;
 
     //("操作返回的数据结果")
+    @ApiModelProperty("操作返回的数据结果")
     private Object data;
 
     public Result(){

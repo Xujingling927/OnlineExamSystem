@@ -2,10 +2,10 @@ package com.examination.controller;
 
 import com.examination.entity.PaperManage;
 import com.examination.entity.Result;
-import com.examination.service.PaperService;
-import com.examination.serviceImpl.PaperServiceImpl;
+import com.examination.service.impl.PaperServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +21,8 @@ public class PaperManageController {
         this.paperService = paperService;
     }
 
+    //TODO 分页功能
+    @ApiOperation(value = "获取所有试卷信息")
     @GetMapping("/papers")
     public Result findAll(){
         List<PaperManage> res = paperService.findAll();
@@ -28,6 +30,7 @@ public class PaperManageController {
         return Result.fail("试卷查找失败",1003);
     }
 
+    @ApiOperation(value = "根据试卷编号查找")
     @ApiImplicitParam(value = "试卷编号",name = "paperId")
     @GetMapping("/paper")
     public Result findById(@RequestParam("paperId") Integer paperId){
@@ -36,6 +39,7 @@ public class PaperManageController {
         return Result.fail("试卷查找失败",1003);
     }
 
+    @ApiOperation(value = "添加试卷")
     @ApiImplicitParam(value = "试卷实体类",name = "paperManage",dataType = "PaperManage")
     @PutMapping("/paper")
     public Result add(@RequestBody PaperManage paperManage){

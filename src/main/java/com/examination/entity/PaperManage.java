@@ -15,6 +15,7 @@ public class PaperManage {
     @ApiModelProperty(name = "paperId",value = "试卷编号",position = 1)
     private Integer paperId;
 
+    // 1-选择 2-填空 3-判断
     @ApiModelProperty(name = "questionType",value = "题目类型",position = 2)
     private Integer questionType;
 

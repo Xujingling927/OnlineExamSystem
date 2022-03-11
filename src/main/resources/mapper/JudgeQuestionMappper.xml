@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.examination.mapper.JudgeQuestionMapper">
+    <select id="findAll" resultType="com.examination.entity.JudgeQuestion">
+        select * from judge_question
+    </select>
+
+    <select id="findById" resultType="com.examination.entity.JudgeQuestion">
+        select jq.* from judge_question jq,paper_manage pm where pm.questionType = 2 and pm.paperId = #{paperId} and jq.questionId=pm.questionId
+    </select>
+
+    <insert id="add" parameterType="com.examination.entity.MultiQuestion">
+        insert into judge_question (questionId,
+                                    subject,
+                                    question,
+                                    answer,
+                                    analysis,
+                                    score,
+                                    level,
+                                    section)
+                                    value   (#{questionId},
+                                            #{subject},
+                                            #{question},
+                                            #{answer},
+                                            #{analysi},
+                                            #{score},
+                                            #{level},
+                                            #{section})
+    </insert>
+
+    <select id="findBySubject" resultType="Integer">
+        select questionId from multi_question where subject = #{subject}
+    </select>
+</mapper>

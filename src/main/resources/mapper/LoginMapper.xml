@@ -6,8 +6,8 @@
         select * from admin where adminId = #{adminId} and pwd = #{password};
     </select>
 
-    <select id="studentLogin" resultType="com.examination.entity.Student">
-        select * from student where studentId = #{studnetId} and pwd = #{password};
+    <select id="studentLogin" resultType="com.examination.entity.Student" >
+        select * from student where studentId = #{studentId} and pwd = #{password};
     </select>
 
     <select id="teacherLogin" resultType="com.examination.entity.Teacher">

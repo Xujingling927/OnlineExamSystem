@@ -4,6 +4,18 @@ spring:
     username: root
     password: xjl241012
     driver-class-name: com.mysql.cj.jdbc.Driver
-#mybatis:
-##  type-aliases-package: com.examination.entity
-##  mapper-locations: classpath:mapper/*.xml
+
+
+
+mybatis:
+  type-aliases-package: com.examination.entity
+  mapper-locations: classpath:mapper/*.xml
+#pagehelper:
+#  dialect: mysql
+#  reasonable: true
+#  support-methods-arguments: true
+#  params: count=countSql
+logging:
+  level:
+    root: info
+

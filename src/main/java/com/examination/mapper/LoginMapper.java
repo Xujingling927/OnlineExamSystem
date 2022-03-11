@@ -11,7 +11,7 @@ public interface LoginMapper {
 
     Admin adminLogin(Integer adminId, String password);
 
-    Student studentLogin(Integer studentId, String password);
+    Student studentLogin(@RequestParam("studentId") Integer studentId, @RequestParam("password") String password);
 
     Teacher teacherLogin(Integer teacherId, String password);
 }
