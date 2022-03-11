@@ -1,15 +1,15 @@
 package com.examination.controller;
 
+import com.examination.controller.common.BaseController;
 import com.examination.entity.Admin;
-import com.examination.entity.ApiResult;
 import com.examination.entity.Result;
 import com.examination.serviceImpl.AdminServiceImpl;
-import com.examination.util.ApiResultHandler;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @Api(tags = "管理员控制")
@@ -24,24 +24,24 @@ public class AdminController {
     @ApiOperation("根据管理员编号查询")
     @ApiImplicitParam(value = "管理员编号",name = "adminId")
     @GetMapping("/admin")
-    public ApiResult findById(@RequestParam("adminId") Integer adminId){
+    public Result findById(@RequestParam("adminId") Integer adminId){
         Admin admin = adminService.findById(adminId);
         if (admin != null){
-            return ApiResultHandler.success(admin);
+            return Result.success(admin);
         }else {
-            return ApiResultHandler.buildApiResult(404," 不存在该管理员",null);
+            return Result.fail("管理员不存在", BaseController.ADMIN_DO_NOT_EXIST);
         }
     }
 
     @ApiOperation("根据管理员编号删除")
     @ApiImplicitParam(value = "管理员编号",name = "adminId")
     @DeleteMapping("/admin")
-    public ApiResult delete(@RequestParam("adminId") Integer adminId){
+    public Result delete(@RequestParam("adminId") Integer adminId){
         int res = adminService.deleteById(adminId);
         if (res == 1) {
-            return ApiResultHandler.buildApiResult(200,"删除成功",null);
+            return Result.success();
         }else {
-            return ApiResultHandler.buildApiResult(400,"删除失败",null);
+            return Result.fail("删除失败",BaseController.DELETE_FAIL);
         }
     }
 
@@ -50,18 +50,18 @@ public class AdminController {
     @PutMapping("/admin")
     public Result update(@RequestBody Admin admin) {
         if(adminService.update(admin) != 0) return Result.success();
-        return Result.fail("未更新",1002);
+        return Result.fail("更新失败",BaseController.UPDATE_FAIL);
     }
 
     @ApiOperation("添加管理员")
     @PostMapping("/admin")
     @ApiImplicitParam(value = "管理员实体类",name = "admin",dataType = "Admin")
-    public ApiResult add(@RequestBody Admin admin) {
+    public Result add(@RequestBody Admin admin) {
         int res = adminService.add(admin);
         if (res == 1) {
-            return ApiResultHandler.buildApiResult(200,"添加成功",null);
+            return Result.success();
         }else {
-            return ApiResultHandler.buildApiResult(400,"添加失败",null);
+            return Result.fail("添加失败", BaseController.INSERT_FAIL);
         }
     }
 

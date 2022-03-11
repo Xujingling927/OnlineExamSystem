@@ -1,10 +1,10 @@
 package com.examination.controller;
 
-import com.examination.entity.ApiResult;
+import com.examination.controller.common.BaseController;
+import com.examination.entity.Result;
 import com.examination.entity.Student;
 import com.examination.service.StudentService;
 import com.examination.serviceImpl.StudentServiceImpl;
-import com.examination.util.ApiResultHandler;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,63 +20,64 @@ public class StudentController {
 
     @ApiOperation("查询所有学生信息")
     @GetMapping("/students")
-    public ApiResult findAll() {
+    public Result findAll() {
         System.out.println(studentService.getClass().getName());
-        return ApiResultHandler.success(studentService.findAll());
+        return Result.success(studentService.findAll());
     }
 
     @ApiOperation("根据学生编号查询")
     @ApiImplicitParam(value = "学生编号",name = "studentId")
     @ApiResponse(code = 200,message = "查找成功")
     @GetMapping("/student")
-    public ApiResult findById(@RequestParam("studentId") Integer studentId){
+    public Result findById(@RequestParam("studentId") Integer studentId){
         Student student = studentService.findById(studentId);
         if (student != null){
-            return ApiResultHandler.success(student);
+            return Result.success(student);
         }else {
-            return ApiResultHandler.buildApiResult(404," 不存在该学生",null);
+            return Result.fail("不存在该学生", BaseController.STUDENT_DO_NOT_EXIST);
         }
     }
 
     @ApiOperation("根据学生编号删除")
     @ApiImplicitParam(value = "学生编号",name = "studentId")
     @DeleteMapping("/student")
-    public ApiResult delete(@RequestParam("studentId") Integer studentId){
+    public Result delete(@RequestParam("studentId") Integer studentId){
         int res = studentService.deleteById(studentId);
         if (res == 1) {
-            return ApiResultHandler.buildApiResult(200,"删除成功",null);
+            return Result.success();
         }else {
-            return ApiResultHandler.buildApiResult(400,"删除失败",null);
+            return Result.fail("删除失败",BaseController.DELETE_FAIL);
         }
     }
 
     @ApiOperation("更新学生所有信息")
     @ApiImplicitParam(value = "学生实体类",name = "student")
     @PutMapping("/student")
-    public int update(@RequestBody Student student) {
-        return studentService.update(student);
+    public Result update(@RequestBody Student student) {
+        if (studentService.update(student) != 0) return Result.success();
+        return Result.fail("更新失败",BaseController.UPDATE_FAIL);
     }
 
     @ApiOperation("添加学生")
     @PostMapping("/student")
     @ApiImplicitParam(value = "学生实体类",name = "student")
-    public ApiResult add(@RequestBody Student student) {
+    public Result add(@RequestBody Student student) {
         int res = studentService.add(student);
         if (res == 1) {
-            return ApiResultHandler.buildApiResult(200,"添加成功",null);
+            return Result.success();
         }else {
-            return ApiResultHandler.buildApiResult(400,"添加失败",null);
+            return Result.fail("添加失败",BaseController.INSERT_FAIL);
         }
     }
 
     @ApiOperation("更改学生密码")
     @PutMapping("/student/modify")
-    public ApiResult updatePwd(@RequestParam("studentId")Integer studentId,@RequestParam("pwd") String pwd){
+    public Result updatePwd(@RequestParam("studentId")Integer studentId,@RequestParam("pwd") String pwd){
         int res = studentService.updatePwd(studentId,pwd);
         if (res == 1) {
-            return ApiResultHandler.buildApiResult(200,"更改成功",null);
+            return Result.success();
         }else {
-            return ApiResultHandler.buildApiResult(400,"更改失败",null);
+            return Result.fail("更改失败",BaseController.UPDATE_FAIL);
         }
     }
 }

@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PaperManage {
 
-    @ApiModelProperty(name = "paperId",value = "试卷编号",position = 1,example = "123")
+    @ApiModelProperty(name = "paperId",value = "试卷编号",position = 1)
     private Integer paperId;
 
-    @ApiModelProperty(name = "questionType",value = "题目类型",position = 2,example = "1")
+    @ApiModelProperty(name = "questionType",value = "题目类型",position = 2)
     private Integer questionType;
 
-    @ApiModelProperty(name = "questionId",value = "试题编号",position = 3,example = "123")
+    @ApiModelProperty(name = "questionId",value = "试题编号",position = 3)
     private Integer questionId;
 
 }

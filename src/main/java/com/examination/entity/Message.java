@@ -1,12 +1,14 @@
 package com.examination.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
 
 @Data
+@ApiModel()
 public class Message {
     private Integer id;
     private Integer temp_id;//解决id为null创建的一个临时id
