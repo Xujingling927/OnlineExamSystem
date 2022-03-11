@@ -2,6 +2,7 @@ package com.examination.controller;
 
 import com.examination.entity.Admin;
 import com.examination.entity.ApiResult;
+import com.examination.entity.Result;
 import com.examination.serviceImpl.AdminServiceImpl;
 import com.examination.util.ApiResultHandler;
 import io.swagger.annotations.Api;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Api(tags = "管理员控制")
 public class AdminController {
-    private final AdminServiceImpl adminService;
+    AdminServiceImpl adminService;
 
     @Autowired
     public AdminController(AdminServiceImpl adminService) {
@@ -47,8 +48,9 @@ public class AdminController {
     @ApiOperation("更新管理员信息")
     @ApiImplicitParam(value = "管理员实体类",name = "admin",dataType = "Admin")
     @PutMapping("/admin")
-    public ApiResult update(@RequestBody Admin admin) {
-        return ApiResultHandler.success();
+    public Result update(@RequestBody Admin admin) {
+        if(adminService.update(admin) != 0) return Result.success();
+        return Result.fail("未更新",1002);
     }
 
     @ApiOperation("添加管理员")

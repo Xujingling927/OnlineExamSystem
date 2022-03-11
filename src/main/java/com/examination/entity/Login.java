@@ -1,26 +1,15 @@
 package com.examination.entity;
 
 
+import lombok.Data;
+
 /**
  * 登陆信息实体类
  */
+@Data
 public class Login {
-    private Integer username;
+    private Integer userId;
     private String password;
-
-    public Integer getUsername() {
-        return username;
-    }
-
-    public void setUsername(Integer username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    //登录角色 0-管理员 1-教师 2-学生
+    private Integer role;
 }

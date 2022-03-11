@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.examination.mapper.PaperManageMapper">
+    <select id="findAll" resultType="com.examination.entity.PaperManage">
+        select paperId, questionType, questionId from paper_manage
+    </select>
+
+    <select id="findById" resultType="com.examination.entity.PaperManage">
+        select paperId, questionType, questionId from paper_manage where paperId = #{paperId}
+    </select>
+
+    <insert id="add" parameterType="com.examination.entity.PaperManage">
+        insert into paper_manage (paperId, questionType, questionId)
+        value (#{paperId},#{#questionType},#{questionId})
+    </insert>
+
+</mapper>

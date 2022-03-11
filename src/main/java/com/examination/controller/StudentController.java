@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@Api
+@Api(tags = "学生控制")
 public class StudentController {
     StudentService studentService;
     @Autowired

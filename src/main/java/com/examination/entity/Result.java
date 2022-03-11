@@ -1,4 +1,4 @@
-package com.examination.util;
+package com.examination.entity;
 
 import java.util.HashMap;
 import java.util.Map;
