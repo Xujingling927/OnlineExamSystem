@@ -22,7 +22,7 @@ public class PaperManageController {
     }
 
     //TODO 分页功能
-    @ApiOperation(value = "获取所有试卷信息")
+    @ApiOperation(value = "获取所有试卷关系信息")
     @GetMapping("/papers")
     public Result findAll(){
         List<PaperManage> res = paperService.findAll();

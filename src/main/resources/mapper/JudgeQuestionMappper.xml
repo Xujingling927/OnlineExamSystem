@@ -10,7 +10,7 @@
         select jq.* from judge_question jq,paper_manage pm where pm.questionType = 2 and pm.paperId = #{paperId} and jq.questionId=pm.questionId
     </select>
 
-    <insert id="add" parameterType="com.examination.entity.MultiQuestion">
+    <insert id="add" parameterType="com.examination.entity.JudgeQuestion">
         insert into judge_question (questionId,
                                     subject,
                                     question,

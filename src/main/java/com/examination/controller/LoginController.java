@@ -32,17 +32,24 @@ public class LoginController {
         String password = login.getPassword();
         Integer role = login.getRole();
         switch (role){
+            //TODO 返回值不要pwd 加密
             case 0:
                 Admin adminRes = loginService.adminLogin(userId,password);
-                if (adminRes!=null) return Result.success(adminRes);
+                if (adminRes!=null){
+                    return Result.success(adminRes);
+                }
                 break;
             case 1:
                 Teacher teacherRes = loginService.teacherLogin(userId,password);
-                if (teacherRes!=null) return  Result.success(teacherRes);
+                if (teacherRes!=null){
+                    return  Result.success(teacherRes);
+                }
                 break;
             case 2:
                 Student studentRes = loginService.studentLogin(userId,password);
-                if (studentRes!=null) return  Result.success(studentRes);
+                if (studentRes!=null){
+                    return  Result.success(studentRes);
+                }
                 break;
         }
         return Result.fail("登陆失败", 1002);

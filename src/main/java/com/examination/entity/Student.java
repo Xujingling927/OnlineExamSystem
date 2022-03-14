@@ -1,5 +1,6 @@
 package com.examination.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -32,6 +33,7 @@ public class Student{
     private String email;
 
     @ApiModelProperty(name = "pwd",value = "密码",position = 9)
+    @JsonIgnore
     private String pwd;
 
     @ApiModelProperty(name = "cardId",value = "身份证号",position = 10)

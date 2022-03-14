@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class BaseControllerImpl implements BaseController{
 
-    @GetMapping("/")
-    public String index(){
-        return "redirect:/swagger-ui.html#";
-    }
+//    @GetMapping("/")
+//    public String index(){
+//        return "redirect:/swagger-ui.html#";
+//    }
 }

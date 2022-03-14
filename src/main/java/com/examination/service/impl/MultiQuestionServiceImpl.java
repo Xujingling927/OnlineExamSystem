@@ -2,7 +2,7 @@ package com.examination.service.impl;
 
 import com.examination.entity.MultiQuestion;
 import com.examination.mapper.MultiQuestionMapper;
-import com.examination.service.MultiQuestionService;
+import com.examination.service.question.MultiQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

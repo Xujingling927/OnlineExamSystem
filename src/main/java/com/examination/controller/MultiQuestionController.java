@@ -23,7 +23,6 @@ public class MultiQuestionController {
         this.multiQuestionService = multiQuestionService;
     }
 
-
     @ApiOperation(value = "获取所有的的选择题")
     @GetMapping("/multiQuestions")
     public Result findAll(){

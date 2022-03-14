@@ -1,5 +1,6 @@
 package com.examination.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -33,6 +34,7 @@ public class Admin {
 
     //密码
     @ApiModelProperty(name = "pwd",value = "密码",position = 6)
+    @JsonIgnore
     private String pwd;
 
     //身份证号

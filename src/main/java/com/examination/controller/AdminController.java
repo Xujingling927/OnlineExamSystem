@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @Api(tags = "管理员控制")
 public class AdminController {
