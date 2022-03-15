@@ -54,7 +54,7 @@ public class AdminController {
 
     @ApiOperation("添加管理员")
     @PostMapping("/admin")
-    @ApiImplicitParam(value = "管理员实体类",name = "admin",dataType = "Admin")
+    @ApiImplicitParam(value = "管理员实体类",name = "admin",dataType = "Admin",dataTypeClass = Admin.class)
     public Result add(@RequestBody Admin admin) {
         int res = adminService.add(admin);
         if (res == 1) {

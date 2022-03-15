@@ -38,7 +38,7 @@ public class MultiQuestionController {
     }
 
     @ApiOperation("向题库中添加选择题")
-    @ApiImplicitParam(name = "multiQuestion",value = "选择题实体")
+    @ApiImplicitParam(name = "multiQuestion",value = "选择题实体",dataTypeClass = MultiQuestion.class)
     @PostMapping("multiQuestion")
     public Result add(@RequestBody MultiQuestion multiQuestion){
         int res = multiQuestionService.add(multiQuestion);

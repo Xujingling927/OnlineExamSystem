@@ -2,21 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.examination.mapper.StudentMapper">
-    <resultMap id="BaseResultMap" type="com.examination.entity.Student">
-        <id column="studentId" property="studentId" />
-        <result column="studentName" property="studentName" />
-        <result column="grade" property="grade" />
-        <result column="major" property="major" />
-        <result column="clazz" property="clazz" />
-        <result column="institute" property="institute" />
-        <result column="email" property="email" />
-        <result column="pwd" property="pwd" />
-        <result column="cardId" property="cardId" />
-        <result column="sex" property="sex" />
-        <result column="role" property="role" />
-        <result column="tel" property="tel" />
-    </resultMap>
-    <select id="findAll" resultMap="BaseResultMap">
+
+    <select id="findAll" resultType="com.examination.entity.Student">
         select * from student
     </select>
 

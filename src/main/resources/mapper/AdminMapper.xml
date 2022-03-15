@@ -11,6 +11,10 @@
         delete from admin where adminId = #{adminId}
     </delete>
 
+    <select id="findById" resultType="com.examination.entity.Admin">
+        select * from admin where adminId = #{adminId}
+    </select>
+
     <update id="update" parameterType="com.examination.entity.Admin">
         update admin set adminName = #{adminName},
                          sex = #{sex},

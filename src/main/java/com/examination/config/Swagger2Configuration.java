@@ -1,4 +1,4 @@
-package com.examination.util;
+package com.examination.config;
 
 import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
