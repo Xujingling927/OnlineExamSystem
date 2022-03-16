@@ -6,8 +6,12 @@
         select * from judge_question
     </select>
 
-    <select id="findById" resultType="com.examination.entity.JudgeQuestion">
+    <select id="findByPaperId" resultType="com.examination.entity.JudgeQuestion">
         select jq.* from judge_question jq,paper_manage pm where pm.questionType = 2 and pm.paperId = #{paperId} and jq.questionId=pm.questionId
+    </select>
+
+    <select id="findByQuestionId" resultType="com.examination.entity.JudgeQuestion">
+        select * from exam.judge_question where questionId = #{questionId};
     </select>
 
     <insert id="add" parameterType="com.examination.entity.JudgeQuestion">

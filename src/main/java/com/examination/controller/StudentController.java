@@ -23,9 +23,9 @@ public class StudentController {
     }
 
     @ApiOperation("查询所有学生信息")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(name = "page",value = "当前页数"),
-//            @ApiImplicitParam(name = "pageId",value = "最大页面")})
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page",value = "当前页数",dataTypeClass = Integer.class),
+            @ApiImplicitParam(name = "pageSize",value = "最大页面",dataTypeClass = Integer.class)})
     @GetMapping("/students")
     public Result findAll(@RequestParam("page") Integer page,@RequestParam("pageSize") Integer pageSize) {
         PageHelper.startPage(page,pageSize);

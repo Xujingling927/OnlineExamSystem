@@ -12,28 +12,35 @@ import java.util.List;
 public class JudgeQuestionServiceImpl implements JudgeQuestionService {
 
 
+    private final JudgeQuestionMapper judgeQuestionMapper;
+    @Autowired
+    public JudgeQuestionServiceImpl(JudgeQuestionMapper judgeQuestionMapper) {
+        this.judgeQuestionMapper = judgeQuestionMapper;
+    }
+
+
     @Override
-    public List<JudgeQuestion> findById(Integer paperId) {
-        return null;
+    public List<JudgeQuestion> findByPaperId(Integer paperId) {
+        return judgeQuestionMapper.findByPaperId(paperId);
     }
 
     @Override
     public List<JudgeQuestion> findAll() {
-        return null;
+        return judgeQuestionMapper.findAll();
     }
 
     @Override
-    public JudgeQuestion findOnlyQuestionId() {
-        return null;
+    public JudgeQuestion findByQuestionId(Integer questionId) {
+        return judgeQuestionMapper.findByQuestionId(questionId);
     }
 
     @Override
     public int add(JudgeQuestion judgeQuestion) {
-        return 0;
+        return judgeQuestionMapper.add(judgeQuestion);
     }
 
     @Override
-    public List<Integer> findBySubject(String subject, Integer pageNo) {
-        return null;
+    public List<Integer> findBySubject(String subject) {
+        return judgeQuestionMapper.findBySubject(subject);
     }
 }

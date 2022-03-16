@@ -7,9 +7,14 @@
         select * from multi_question
     </select>
 
-    <select id="findById" resultType="com.examination.entity.MultiQuestion">
+    <select id="findByPaperId" resultType="com.examination.entity.MultiQuestion">
         select mq.* from multi_question mq,paper_manage pm where pm.questionType = 2 and pm.paperId = #{paperId} and mq.questionId=pm.questionId
     </select>
+
+    <select id="findByQuestionId" resultType="com.examination.entity.MultiQuestion">
+        select * from exam.multi_question where questionId = #{questionId}
+    </select>
+
 
     <insert id="add" parameterType="com.examination.entity.MultiQuestion">
         insert into multi_question (questionId,

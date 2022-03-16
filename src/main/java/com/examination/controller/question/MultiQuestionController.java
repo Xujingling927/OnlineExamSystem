@@ -1,6 +1,7 @@
-package com.examination.controller;
+package com.examination.controller.question;
 
 import com.examination.controller.common.BaseController;
+import com.examination.entity.FillQuestion;
 import com.examination.entity.MultiQuestion;
 import com.examination.entity.Result;
 import com.examination.service.impl.MultiQuestionServiceImpl;
@@ -33,8 +34,18 @@ public class MultiQuestionController {
     @ApiImplicitParam(name = "paperId",value = "试卷编号")
     @GetMapping("/multiQuestion")
     public Result findById(@RequestParam Integer paperId) {
-        List<MultiQuestion> res = multiQuestionService.findById(paperId);
-        return Result.success(res);
+        List<MultiQuestion> res = multiQuestionService.findByPaperId(paperId);
+        if (res.size()>0) return Result.success(res);
+        return Result.fail("查找失败",404);
+    }
+
+    @GetMapping("/multiQuestion/")
+    @ApiOperation("通过题目编号获取选择题")
+    @ApiImplicitParam(name = "questionId",value = "题目编号",dataTypeClass = Integer.class)
+    public Result findByQuestionId(@RequestParam("questionId") Integer questionId){
+        MultiQuestion multiQuestion = multiQuestionService.findByQuestionId(questionId);
+        if (multiQuestion != null) return Result.success(multiQuestion);
+        else return Result.fail("查找题目失败",404);
     }
 
     @ApiOperation("向题库中添加选择题")

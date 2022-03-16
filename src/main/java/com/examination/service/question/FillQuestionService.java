@@ -5,13 +5,13 @@ import com.examination.entity.FillQuestion;
 import java.util.List;
 
 public interface FillQuestionService {
-    List<FillQuestion> findById(Integer paperId);
+    List<FillQuestion> findByPaperId(Integer paperId);
 
     List<FillQuestion> findAll();
 
-    FillQuestion findOnlyQuestionId();
+    FillQuestion findByQuestionId(Integer questionId);
 
     int add(FillQuestion fillQuestion);
 
-    List<Integer> findBySubject(String subject,Integer pageNo);
+    List<Integer> findBySubject(String subject);
 }

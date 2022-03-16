@@ -7,13 +7,13 @@ import java.util.List;
 
 @Mapper
 public interface MultiQuestionMapper {
-    List<MultiQuestion> findById(Integer paperId);
+    List<MultiQuestion> findByPaperId(Integer paperId);
 
     List<MultiQuestion> findAll();
 
-    MultiQuestion findOnlyQuestionId();
+    MultiQuestion findByQuestionId(Integer questionId);
 
     int add(MultiQuestion multiQuestion);
 
-    List<Integer> findBySubject(String subject,Integer pageNo);
+    List<Integer> findBySubject(String subject);
 }
