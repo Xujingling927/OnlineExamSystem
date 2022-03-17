@@ -6,9 +6,12 @@ import com.examination.entity.Teacher;
 
 public interface LoginService {
 
-    public Admin adminLogin(Integer adminId,String password);
+    Admin adminLogin(Integer adminId, String password);
 
-    public Student studentLogin(Integer studentId,String password);
+    Student studentLogin(Integer studentId, String password);
 
-    public Teacher teacherLogin(Integer teacherId,String password);
+    Teacher teacherLogin(Integer teacherId, String password);
+
+
+
 }

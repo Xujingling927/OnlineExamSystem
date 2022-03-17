@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-@ApiModel("考试管理类")
+@ApiModel(value = "ExamManage",description = "考试管理类")
 public class ExamManage {
 
     @ApiModelProperty(name = "examCode",value = "考试编号",position = 1)

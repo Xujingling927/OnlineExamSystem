@@ -1,5 +1,6 @@
 package com.examination.controller;
 
+import com.examination.component.AdminAuth;
 import com.examination.controller.common.BaseController;
 import com.examination.entity.Admin;
 import com.examination.entity.Result;
@@ -20,6 +21,7 @@ public class AdminController {
         this.adminService = adminService;
     }
 
+
     @ApiOperation("根据管理员编号查询")
     @ApiImplicitParam(value = "管理员编号",name = "adminId")
     @GetMapping("/admin")
@@ -32,7 +34,8 @@ public class AdminController {
         }
     }
 
-    @ApiOperation("根据管理员编号删除")
+    @AdminAuth
+    @ApiOperation(value = "根据管理员编号删除",tags = "管理员权限")
     @ApiImplicitParam(value = "管理员编号",name = "adminId")
     @DeleteMapping("/admin")
     public Result delete(@RequestParam("adminId") Integer adminId){
@@ -44,7 +47,8 @@ public class AdminController {
         }
     }
 
-    @ApiOperation("更新管理员信息")
+    @AdminAuth
+    @ApiOperation(value = "更新管理员信息",tags = "管理员权限")
     @ApiImplicitParam(value = "管理员实体类",name = "admin",dataType = "Admin")
     @PutMapping("/admin")
     public Result update(@RequestBody Admin admin) {
@@ -52,9 +56,10 @@ public class AdminController {
         return Result.fail("更新失败",BaseController.UPDATE_FAIL);
     }
 
-    @ApiOperation("添加管理员")
+    @AdminAuth
+    @ApiOperation(value = "添加管理员",tags = "管理员权限")
     @PostMapping("/admin")
-    @ApiImplicitParam(value = "管理员实体类",name = "admin",dataType = "Admin",dataTypeClass = Admin.class)
+    @ApiImplicitParam(value = "管理员实体类",name = "admin",dataType = "Admin")
     public Result add(@RequestBody Admin admin) {
         int res = adminService.add(admin);
         if (res == 1) {

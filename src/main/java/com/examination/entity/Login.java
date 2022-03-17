@@ -8,7 +8,7 @@ import lombok.Data;
 /**
  * 登陆信息实体类
  */
-@ApiModel("登陆信息")
+@ApiModel(value = "Login",description = "登陆信息")
 @Data
 public class Login {
 

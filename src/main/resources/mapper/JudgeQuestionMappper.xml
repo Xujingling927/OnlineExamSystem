@@ -15,22 +15,8 @@
     </select>
 
     <insert id="add" parameterType="com.examination.entity.JudgeQuestion">
-        insert into judge_question (questionId,
-                                    subject,
-                                    question,
-                                    answer,
-                                    analysis,
-                                    score,
-                                    level,
-                                    section)
-                                    value   (#{questionId},
-                                            #{subject},
-                                            #{question},
-                                            #{answer},
-                                            #{analysi},
-                                            #{score},
-                                            #{level},
-                                            #{section})
+        insert into judge_question (questionId,subject,question,answer,analysis,score,level,section)
+                                    value (#{questionId},#{subject},#{question},#{answer},#{analysis},#{score},#{level},#{section})
     </insert>
 
     <select id="findBySubject" resultType="Integer">

@@ -1,7 +1,7 @@
 package com.examination.controller;
 
+import com.examination.component.AdminAuth;
 import com.examination.service.StudentService;
-import com.examination.util.AuthToken;
 import com.examination.controller.common.BaseController;
 import com.examination.entity.Result;
 import com.examination.entity.Student;
@@ -22,7 +22,8 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @ApiOperation("查询所有学生信息")
+    @AdminAuth
+    @ApiOperation(value = "查询所有学生信息",tags = "管理员权限")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page",value = "当前页数",dataTypeClass = Integer.class),
             @ApiImplicitParam(name = "pageSize",value = "最大页面",dataTypeClass = Integer.class)})
@@ -31,6 +32,7 @@ public class StudentController {
         PageHelper.startPage(page,pageSize);
         return Result.success(PageInfo.of(studentService.findAll()));
     }
+
 
     @ApiOperation("根据学生编号查询")
     @ApiImplicitParam(value = "学生编号",name = "studentId")
@@ -45,7 +47,8 @@ public class StudentController {
         }
     }
 
-    @ApiOperation("根据学生编号删除")
+    @AdminAuth
+    @ApiOperation(value = "根据学生编号删除",tags = "管理员权限")
     @ApiImplicitParam(value = "学生编号",name = "studentId")
     @DeleteMapping("/student")
     public Result delete(@RequestParam("studentId") Integer studentId){
@@ -58,17 +61,24 @@ public class StudentController {
     }
 
     @ApiOperation("更新学生所有信息")
-    @ApiImplicitParam(value = "学生实体类",name = "student",dataTypeClass = Student.class)
+    @ApiImplicitParam(value = "学生实体类",name = "student",dataType ="Student")
     @PutMapping("/student")
     public Result update(@RequestBody Student student) {
         if (studentService.update(student) != 0) return Result.success();
         return Result.fail("更新失败",BaseController.UPDATE_FAIL);
     }
 
-    @ApiOperation("添加学生")
+    @AdminAuth
+    @ApiOperation(value = "添加学生",tags = "管理员权限")
     @PostMapping("/student")
-    @ApiImplicitParam(value = "学生实体类",name = "student",dataTypeClass = Student.class)
+    @ApiImplicitParam(value = "学生实体类",name = "student",dataType ="Student")
     public Result add(@RequestBody Student student) {
+        String cardId = student.getCardId();
+        String initPwd = "123456";
+        if (cardId.length() > 6){
+            initPwd = cardId.substring(cardId.length() - 6);
+        }
+        student.setPwd(initPwd);
         int res = studentService.add(student);
         if (res == 1) {
             return Result.success();

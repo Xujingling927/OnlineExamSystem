@@ -1,5 +1,6 @@
 package com.examination.controller.question;
 
+import com.examination.component.AdminAuth;
 import com.examination.controller.common.BaseController;
 import com.examination.entity.FillQuestion;
 import com.examination.entity.Result;
@@ -14,6 +15,7 @@ import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -47,7 +49,7 @@ public class FillQuestionController {
         else return Result.fail("查找失败",404);
     }
 
-    @GetMapping("/fillQuestion/search")
+    @GetMapping("/fillQuestion/")
     @ApiOperation("根据题目编号查找填空题")
     @ApiImplicitParam(name = "questionId",value = "题目编号",dataTypeClass = Integer.class)
     public Result findByQuestionId(@RequestParam("questionId") Integer questionId){
@@ -57,12 +59,11 @@ public class FillQuestionController {
     }
 
 
-
-
-    @PutMapping("/fillQuestion")
-    @ApiOperation("向题库中添加新的选择题")
-    @ApiImplicitParam(name = "fillQuestion",value = "填空题实体类",dataTypeClass = FillQuestion.class)
-    public Result add(FillQuestion fillQuestion){
+    @AdminAuth
+    @PostMapping("/fillQuestion")
+    @ApiOperation(value = "向题库中添加新的填空题",tags = "管理员权限")
+    @ApiImplicitParam(name = "fillQuestion",value = "填空题实体类",dataType = "FillQuestion",dataTypeClass = FillQuestion.class)
+    public Result add(@RequestBody  FillQuestion fillQuestion){
         return fillQuestionService.add(fillQuestion)==0 ? Result.fail("添加失败", BaseController.INSERT_FAIL) : Result.success();
     }
 

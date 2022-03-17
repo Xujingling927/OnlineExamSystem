@@ -19,7 +19,7 @@
     </select>
 
     <insert id="add" parameterType="com.examination.entity.FillQuestion">
-        insert into fill_question (subject, question, answer, analysis, score, level, section)
+        insert into fill_question (subject,question,answer,analysis,score,level,section)
         value (#{subject},#{question},#{answer},#{analysis},#{score},#{level},#{section})
     </insert>
 

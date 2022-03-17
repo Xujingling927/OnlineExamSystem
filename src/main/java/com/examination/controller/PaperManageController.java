@@ -1,5 +1,6 @@
 package com.examination.controller;
 
+import com.examination.component.AdminAuth;
 import com.examination.entity.PaperManage;
 import com.examination.entity.Result;
 import com.examination.service.impl.PaperServiceImpl;
@@ -21,7 +22,6 @@ public class PaperManageController {
         this.paperService = paperService;
     }
 
-    //TODO 分页功能
     @ApiOperation(value = "获取所有试卷关系信息")
     @GetMapping("/papers")
     public Result findAll(){
@@ -39,7 +39,8 @@ public class PaperManageController {
         return Result.fail("试卷查找失败",1003);
     }
 
-    @ApiOperation(value = "添加试卷")
+    @AdminAuth
+    @ApiOperation(value = "添加试卷",tags = "管理员权限")
     @ApiImplicitParam(value = "试卷实体类",name = "paperManage",dataType = "PaperManage")
     @PutMapping("/paper")
     public Result add(@RequestBody PaperManage paperManage){

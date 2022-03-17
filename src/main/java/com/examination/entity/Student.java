@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-@ApiModel()
+@ApiModel(value = "Student",description = "学生实体类")
 public class Student{
     @ApiModelProperty(name = "studentId",value = "学生编号",position = 1)
     private Integer studentId;

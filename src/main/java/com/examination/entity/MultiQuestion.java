@@ -6,7 +6,7 @@ import lombok.Data;
 
 // 选择题实体
 @Data
-@ApiModel("选择题实体类")
+@ApiModel(value = "MultiQuestion",description = "选择题实体类")
 public class MultiQuestion {
 
     @ApiModelProperty(name = "questionId",value = "试题编号",position = 1)
