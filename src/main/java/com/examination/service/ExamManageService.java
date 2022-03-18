@@ -11,7 +11,7 @@ public interface ExamManageService {
      */
     List<ExamManage> findAll();
 
-    ExamManage findById(Integer examCode);
+    ExamManage findByExamCode(Integer examCode);
 
     int delete(Integer examCode);
 
@@ -19,5 +19,5 @@ public interface ExamManageService {
 
     int add(ExamManage exammanage);
 
-    ExamManage findOnlyPaperId();
+    List<ExamManage> findByPaperId(Integer paperId);
 }

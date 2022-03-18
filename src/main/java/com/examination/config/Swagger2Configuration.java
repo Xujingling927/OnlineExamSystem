@@ -19,12 +19,11 @@ import java.util.List;
 @EnableSwagger2
 public class Swagger2Configuration {
 
-    private final String TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjMifQ.xKPoMpjMrGHF2iDgqhXrvyypo8HGEZtqDcnND2tQyPo";
-
     @Bean
     public Docket createRestApi() {
         ParameterBuilder tokenPar = new ParameterBuilder();
         List<Parameter> parameters = new ArrayList<>();
+        String TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjowLCJ1c2VyTmFtZSI6InRlc3RPbmx5IiwidXNlcklkIjo4ODg4OH0.cBF9PnO8YDLUbgK7h_IS5hVUDtgH6B0XWlHuz1f0NkY";
         tokenPar.name(HttpHeaders.AUTHORIZATION)
                 .description("Token")
                 .defaultValue(TOKEN)
@@ -41,6 +40,7 @@ public class Swagger2Configuration {
                 .build()
                 .globalOperationParameters(parameters);
     }
+
 
 
 

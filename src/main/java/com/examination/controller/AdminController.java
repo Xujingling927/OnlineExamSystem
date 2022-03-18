@@ -1,6 +1,7 @@
 package com.examination.controller;
 
 import com.examination.component.AdminAuth;
+import com.examination.component.LoginAuth;
 import com.examination.controller.common.BaseController;
 import com.examination.entity.Admin;
 import com.examination.entity.Result;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@LoginAuth
 @RestController
 @Api(tags = "管理员控制")
 public class AdminController {
@@ -22,6 +24,7 @@ public class AdminController {
     }
 
 
+    @LoginAuth
     @ApiOperation("根据管理员编号查询")
     @ApiImplicitParam(value = "管理员编号",name = "adminId")
     @GetMapping("/admin")

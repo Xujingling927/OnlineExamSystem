@@ -1,6 +1,7 @@
 package com.examination.controller.question;
 
 import com.examination.component.AdminAuth;
+import com.examination.component.LoginAuth;
 import com.examination.controller.common.BaseController;
 import com.examination.entity.FillQuestion;
 import com.examination.entity.Result;
@@ -28,6 +29,7 @@ public class FillQuestionController {
         this.fillQuestionService = fillQuestionService;
     }
 
+    @AdminAuth
     @GetMapping("/fillQuestions")
     @ApiOperation("查找题库中所有填空题")
     @ApiImplicitParams({
@@ -38,6 +40,7 @@ public class FillQuestionController {
         return Result.success(PageInfo.of(fillQuestionService.findAll()));
     }
 
+    @LoginAuth
     @GetMapping("/fillQuestion")
     @ApiOperation("根据试卷编号查找该试卷中的所有填空题")
     @ApiImplicitParam(name = "paperId",value = "试卷编号")
@@ -49,6 +52,7 @@ public class FillQuestionController {
         else return Result.fail("查找失败",404);
     }
 
+    @LoginAuth
     @GetMapping("/fillQuestion/")
     @ApiOperation("根据题目编号查找填空题")
     @ApiImplicitParam(name = "questionId",value = "题目编号",dataTypeClass = Integer.class)

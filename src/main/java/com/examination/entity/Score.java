@@ -8,7 +8,7 @@ import lombok.Data;
 @ApiModel("成绩管理类")
 public class Score {
 
-    @ApiModelProperty(name = "examCode",value = "考试编号")
+    @ApiModelProperty(name = "examCode",value = "考试码")
     private Integer examCode;
 
     @ApiModelProperty(name = "studentId",value = "学生编号")

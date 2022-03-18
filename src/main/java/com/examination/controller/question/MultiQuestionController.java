@@ -1,5 +1,7 @@
 package com.examination.controller.question;
 
+import com.examination.component.AdminAuth;
+import com.examination.component.LoginAuth;
 import com.examination.controller.common.BaseController;
 import com.examination.entity.FillQuestion;
 import com.examination.entity.MultiQuestion;
@@ -24,12 +26,14 @@ public class MultiQuestionController {
         this.multiQuestionService = multiQuestionService;
     }
 
-    @ApiOperation(value = "获取所有的的选择题")
+    @AdminAuth
+    @ApiOperation(value = "获取所有的的选择题",tags = "管理员权限")
     @GetMapping("/multiQuestions")
     public Result findAll(){
         return Result.success(multiQuestionService.findAll());
     }
 
+    @LoginAuth
     @ApiOperation(value = "获取该试卷编号下的所有选择题")
     @ApiImplicitParam(name = "paperId",value = "试卷编号")
     @GetMapping("/multiQuestion")
@@ -39,6 +43,7 @@ public class MultiQuestionController {
         return Result.fail("查找失败",404);
     }
 
+    @LoginAuth
     @GetMapping("/multiQuestion/")
     @ApiOperation("通过题目编号获取选择题")
     @ApiImplicitParam(name = "questionId",value = "题目编号",dataTypeClass = Integer.class)
@@ -48,6 +53,7 @@ public class MultiQuestionController {
         else return Result.fail("查找题目失败",404);
     }
 
+    @AdminAuth
     @ApiOperation("向题库中添加选择题")
     @ApiImplicitParam(name = "multiQuestion",value = "选择题实体",dataType="MultiQuestion")
     @PostMapping("multiQuestion")

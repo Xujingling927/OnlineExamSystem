@@ -1,6 +1,7 @@
 package com.examination.controller.question;
 
 import com.examination.component.AdminAuth;
+import com.examination.component.LoginAuth;
 import com.examination.component.StudentAuth;
 import com.examination.controller.common.BaseController;
 import com.examination.entity.FillQuestion;
@@ -28,6 +29,7 @@ public class JudgeQuestionController {
         this.judgeQuestionService = judgeQuestionService;
     }
 
+    @AdminAuth
     @ApiOperation(value = "获取所有的的判断题")
     @GetMapping("/judgeQuestions")
     public Result findAll(@RequestParam("page") Integer page,@RequestParam("pageSize") Integer pageSize){
@@ -35,7 +37,7 @@ public class JudgeQuestionController {
         return Result.success(PageInfo.of(judgeQuestionService.findAll()));
     }
 
-
+    @LoginAuth
     @ApiOperation(value = "获取该试卷编号下的所有判断题")
     @ApiImplicitParam(name = "paperId",value = "试卷编号")
     @GetMapping("/judgeQuestion")
@@ -45,6 +47,7 @@ public class JudgeQuestionController {
         else return Result.fail("查找失败",404);
     }
 
+    @LoginAuth
     @GetMapping("/judgeQuestion/")
     @ApiOperation("通过题目编号查找判断题")
     @ApiImplicitParam(name = "questionId",value = "题目编号")

@@ -5,10 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.examination.component.AdminAuth;
-import com.examination.component.PassToken;
-import com.examination.component.StudentAuth;
-import com.examination.component.TeacherAuth;
+import com.examination.component.*;
 import com.examination.entity.Admin;
 import com.examination.entity.Student;
 import com.examination.entity.Teacher;
@@ -53,8 +50,35 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 log.info(".........不需要验证token.......");
                 return true;
             }
-        }
 
+        }
+        if (method.isAnnotationPresent(LoginAuth.class)){
+            log.info("{},验证是否登陆",httpServletRequest.getRequestURI());
+            LoginAuth loginAuth = method.getAnnotation(LoginAuth.class);
+            if (loginAuth.required()){
+                if (token == null) {
+                    log.info("no token");
+                    httpServletResponse.sendError(401,"无token，请重新登录");
+                    return false;
+                }
+            }
+            // 验证 token
+            JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
+            try {
+                if (!jwtVerifier.verify(token).getClaim("userId").isNull()){
+                    log.info("校验成功");
+                    return true;
+                }
+                else{
+                    httpServletResponse.sendError(401);
+                    return false;
+                }
+            } catch (JWTVerificationException e) {
+                log.info("Verify Token: invalid token");
+                httpServletResponse.sendError(401,"token无效");
+                return false;
+            }
+        }
         //检查有没有需要管理员权限的注解
         if (method.isAnnotationPresent(AdminAuth.class)) {
             log.info("验证管理员权限");

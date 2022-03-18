@@ -1,6 +1,7 @@
 package com.examination.controller;
 
 import com.examination.component.AdminAuth;
+import com.examination.component.LoginAuth;
 import com.examination.entity.PaperManage;
 import com.examination.entity.Result;
 import com.examination.service.impl.PaperServiceImpl;
@@ -22,6 +23,7 @@ public class PaperManageController {
         this.paperService = paperService;
     }
 
+    @LoginAuth
     @ApiOperation(value = "获取所有试卷关系信息")
     @GetMapping("/papers")
     public Result findAll(){
@@ -30,6 +32,7 @@ public class PaperManageController {
         return Result.fail("试卷查找失败",1003);
     }
 
+    @LoginAuth
     @ApiOperation(value = "根据试卷编号查找")
     @ApiImplicitParam(value = "试卷编号",name = "paperId")
     @GetMapping("/paper")

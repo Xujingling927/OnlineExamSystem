@@ -18,7 +18,7 @@
 
     <insert id="add" parameterType="com.examination.entity.MultiQuestion">
         insert into multi_question (questionId,subject,question,answerA,answerB,answerC,answerD,rightAnswer,analysis,score,section,level)
-        VALUE (#{questionId},#{subject}, #{question}, #{answerA},#{answerB},#{answerC},#{answerD},#{rightAnswer},#{analysis},#{score},#{section},#{level})
+        value (#{questionId},#{subject}, #{question}, #{answerA},#{answerB},#{answerC},#{answerD},#{rightAnswer},#{analysis},#{score},#{section},#{level})
     </insert>
 
     <select id="findBySubject" resultType="Integer">

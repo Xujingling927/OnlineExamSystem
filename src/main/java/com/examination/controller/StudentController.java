@@ -1,6 +1,7 @@
 package com.examination.controller;
 
 import com.examination.component.AdminAuth;
+import com.examination.component.LoginAuth;
 import com.examination.service.StudentService;
 import com.examination.controller.common.BaseController;
 import com.examination.entity.Result;
@@ -9,9 +10,13 @@ import com.examination.service.impl.StudentServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@Slf4j
 @RestController
 @Api(tags = "学生控制")
 public class StudentController {
@@ -34,6 +39,7 @@ public class StudentController {
     }
 
 
+    @LoginAuth
     @ApiOperation("根据学生编号查询")
     @ApiImplicitParam(value = "学生编号",name = "studentId")
     @ApiResponse(code = 200,message = "查找成功")
@@ -47,19 +53,38 @@ public class StudentController {
         }
     }
 
+//    @AdminAuth
+//    @ApiOperation(value = "根据学生编号删除",tags = "管理员权限")
+//    @ApiImplicitParam(value = "学生编号",name = "studentId")
+//    @DeleteMapping("/student")
+//    public Result delete(@RequestParam("studentId") Integer studentId){
+//        int res = studentService.deleteById(studentId);
+//        if (res == 1) {
+//            return Result.success();
+//        }else {
+//            return Result.fail("删除失败",BaseController.DELETE_FAIL);
+//        }
+//    }
+
     @AdminAuth
-    @ApiOperation(value = "根据学生编号删除",tags = "管理员权限")
-    @ApiImplicitParam(value = "学生编号",name = "studentId")
+    @ApiOperation(value ="批量删除学生",tags = "管理员权限")
+    @ApiImplicitParams({@ApiImplicitParam (value = "学生编号列表",name = "list",dataType = "Integer")})
     @DeleteMapping("/student")
-    public Result delete(@RequestParam("studentId") Integer studentId){
-        int res = studentService.deleteById(studentId);
-        if (res == 1) {
-            return Result.success();
-        }else {
+    public Result deleteMultiStudent(@RequestParam(name = "list") List<Integer> list){
+        //删除成功数
+        int count = 0;
+        for (Integer student:list){
+            log.info("studentId is {}",student);
+            count += studentService.deleteById(student);
+            log.info("成功删除{}个学生",count);
+        }
+        if (count == 0){
             return Result.fail("删除失败",BaseController.DELETE_FAIL);
         }
+        else return Result.successMs("已成功删除"+count+"个学生");
     }
 
+    @LoginAuth
     @ApiOperation("更新学生所有信息")
     @ApiImplicitParam(value = "学生实体类",name = "student",dataType ="Student")
     @PutMapping("/student")
@@ -87,6 +112,7 @@ public class StudentController {
         }
     }
 
+    @LoginAuth
     @ApiOperation("更改学生密码")
     @PutMapping("/student/modify")
     public Result updatePwd(@RequestParam("studentId")Integer studentId,@RequestParam("pwd") String pwd){

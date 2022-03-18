@@ -5,4 +5,40 @@
     <select id="findAll" resultType="com.examination.entity.ExamManage">
         select * from exam_manage
     </select>
+
+    <select id="findByExamCode" resultType="com.examination.entity.ExamManage">
+        select * from exam_manage where examCode = #{examCode}
+    </select>
+
+    <select id="findByPaperId" resultType="com.examination.entity.ExamManage">
+        select *
+        from exam_manage where paperId = #{paperId} ;
+    </select>
+
+    <delete id="delete" parameterType="Integer">
+        delete from exam_manage where exam_manage.examCode = #{examCode}
+    </delete>
+
+    <update id="update" parameterType="com.examination.entity.ExamManage">
+        update exam.exam_manage set exam.exam_manage.description = #{description},
+                                    source = #{source},
+                                    paperId = #{paperId},
+                                    examDate = #{examDate},
+                                    totalScore = #{totalScore},
+                                    totalTime = #{totalTime},
+                                    grade = #{grade},
+                                    term = #{term},
+                                    major = #{major},
+                                    institute = #{institute},
+                                    totalScore = #{totalScore},
+                                    type = #{type},
+                                    tips = #{tips}
+        where exam.exam_manage.examCode = #{examCode}
+    </update>
+
+    <insert id="add" parameterType="com.examination.entity.ExamManage">
+        insert into exam.exam_manage(exam.exam_manage.description, exam.exam_manage.source, exam.exam_manage.paperId, exam.exam_manage.examDate, exam.exam_manage.totalTime, exam.exam_manage.grade, exam.exam_manage.term, exam.exam_manage.major, exam.exam_manage.institute, exam.exam_manage.totalScore, exam.exam_manage.type, exam.exam_manage.tips)
+        value (#{description},#{source},#{paperId},#{examDate},#{totalTime},#{grade},#{term},#{major},#{institute},#{totalScore},#{type},#{tips})
+    </insert>
+
 </mapper>
