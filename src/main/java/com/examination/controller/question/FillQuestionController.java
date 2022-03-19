@@ -46,7 +46,7 @@ public class FillQuestionController {
     @ApiImplicitParam(name = "paperId",value = "试卷编号")
     public Result findByPaperId(@RequestParam("paperId") Integer paperId){
         List<FillQuestion> list = fillQuestionService.findByPaperId(paperId);
-        if (list.size()>0){
+        if (!list.isEmpty()){
             return Result.success(list);
         }
         else return Result.fail("查找失败",404);

@@ -39,7 +39,7 @@ public class MultiQuestionController {
     @GetMapping("/multiQuestion")
     public Result findById(@RequestParam Integer paperId) {
         List<MultiQuestion> res = multiQuestionService.findByPaperId(paperId);
-        if (res.size()>0) return Result.success(res);
+        if (!res.isEmpty()) return Result.success(res);
         return Result.fail("查找失败",404);
     }
 

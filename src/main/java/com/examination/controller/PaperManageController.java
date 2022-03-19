@@ -28,7 +28,7 @@ public class PaperManageController {
     @GetMapping("/papers")
     public Result findAll(){
         List<PaperManage> res = paperService.findAll();
-        if (res!=null) return Result.success(res);
+        if (!res.isEmpty()) return Result.success(res);
         return Result.fail("试卷查找失败",1003);
     }
 
@@ -38,14 +38,14 @@ public class PaperManageController {
     @GetMapping("/paper")
     public Result findById(@RequestParam("paperId") Integer paperId){
         List<PaperManage> res = paperService.findById(paperId);
-        if (res!=null) return Result.success(res);
+        if (!res.isEmpty()) return Result.success(res);
         return Result.fail("试卷查找失败",1003);
     }
 
     @AdminAuth
     @ApiOperation(value = "添加试卷",tags = "管理员权限")
     @ApiImplicitParam(value = "试卷实体类",name = "paperManage",dataType = "PaperManage")
-    @PutMapping("/paper")
+    @PostMapping("/paper")
     public Result add(@RequestBody PaperManage paperManage){
         if (paperService.add(paperManage)!= 0){
             return Result.success();

@@ -29,7 +29,7 @@ public class MultiQuestionServiceImpl implements MultiQuestionService {
 
     @Override
     public MultiQuestion findByQuestionId(Integer questionId) {
-        return findByQuestionId(questionId);
+        return multiQuestionMapper.findByQuestionId(questionId);
     }
 
 
