@@ -9,11 +9,13 @@ import lombok.Data;
 @ApiModel(value = "Answer",description = "学生答题")
 public class Answer {
 
-    @ApiModelProperty
+    @ApiModelProperty(name = "questionId",value = "题目编号")
     private Integer questionId;
 
-    private Integer type;
+    @ApiModelProperty(name = "questionType",value = "题目类型")
+    private Integer questionType;
 
+    @ApiModelProperty(name = "studentAnswer",value = "学生回答")
     private String studentAnswer;
 
 }

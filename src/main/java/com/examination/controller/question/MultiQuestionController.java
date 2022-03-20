@@ -8,6 +8,7 @@ import com.examination.entity.MultiQuestion;
 import com.examination.entity.Result;
 import com.examination.service.impl.MultiQuestionServiceImpl;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -29,8 +30,11 @@ public class MultiQuestionController {
     @AdminAuth
     @ApiOperation(value = "获取所有的的选择题",tags = "管理员权限")
     @GetMapping("/multiQuestions")
-    public Result findAll(){
-        return Result.success(multiQuestionService.findAll());
+    public Result findAll(@RequestParam("page") Integer page,@RequestParam("pageSize") Integer pageSize){
+        PageHelper.startPage(page,pageSize);
+        List<MultiQuestion> res = multiQuestionService.findAll();
+        if (res.isEmpty()) return Result.fail("查找失败",404);
+        return Result.success(PageInfo.of(res));
     }
 
     @LoginAuth

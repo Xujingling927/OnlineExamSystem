@@ -17,12 +17,6 @@ public class Score {
     @ApiModelProperty(name = "subject",value = "考试科目")
     private String subject;
 
-    @ApiModelProperty(name = "ptScore",value = "平时成绩")
-    private Integer ptScore;
-
-    @ApiModelProperty(name = "etScore",value = "期末成绩")
-    private Integer etScore;
-
     @ApiModelProperty(name = "score",value = "总成绩")
     private Integer score;
 

@@ -84,7 +84,7 @@ public class ExamManageController {
             @ApiResponse(code = BaseController.INSERT_FAIL,message = "添加失败"),
             @ApiResponse(code = 200,message = "成功")
     })
-    @PostMapping("exam")
+    @PostMapping("/exam")
     public Result add(@RequestBody ExamManage examManage){
         if (examManageService.add(examManage)==0){
             return Result.fail("添加失败",BaseController.INSERT_FAIL);
@@ -99,6 +99,7 @@ public class ExamManageController {
             @ApiResponse(code = BaseController.DELETE_FAIL,message = "删除失败"),
             @ApiResponse(code = 200,message = "已成功删除XX个考试")
     })
+    @DeleteMapping("/exam")
     public Result delete(@RequestParam("list") List<Integer> list){
         int count = 0;
         for (Integer exam:list){
