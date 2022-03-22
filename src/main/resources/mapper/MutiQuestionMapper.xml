@@ -4,15 +4,20 @@
 <mapper namespace="com.examination.mapper.MultiQuestionMapper">
 
     <select id="findAll" resultType="com.examination.entity.MultiQuestion">
-        select * from multi_question
+        select *
+        from multi_question
     </select>
 
     <select id="findByPaperId" resultType="com.examination.entity.MultiQuestion">
-        select mq.* from multi_question mq,paper_manage pm where pm.questionType = 2 and pm.paperId = #{paperId} and mq.questionId=pm.questionId
+        select mq.*
+        from multi_question mq,paper_manage pm
+        where pm.questionType = 2 and pm.paperId = #{paperId} and mq.questionId=pm.questionId
     </select>
 
     <select id="findByQuestionId" resultType="com.examination.entity.MultiQuestion">
-        select * from exam.multi_question where questionId = #{questionId}
+        select *
+        from exam.multi_question
+        where questionId = #{questionId}
     </select>
 
 
@@ -22,7 +27,9 @@
     </insert>
 
     <select id="findBySubject" resultType="Integer">
-        select questionId from multi_question where subject = #{subject}
+        select questionId
+        from multi_question
+        where subject = #{subject}
     </select>
 
 </mapper>

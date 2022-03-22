@@ -43,8 +43,8 @@ public class StudentController {
     @ApiOperation("根据学生编号查询")
     @ApiImplicitParam(value = "学生编号",name = "studentId")
     @ApiResponse(code = 200,message = "查找成功")
-    @GetMapping("/student")
-    public Result findById(@RequestParam("studentId") Integer studentId){
+    @GetMapping("/student/{studentId}")
+    public Result findById(@PathVariable("studentId") Integer studentId){
         Student student = studentService.findById(studentId);
         if (student != null){
             return Result.success(student);

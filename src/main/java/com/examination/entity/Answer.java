@@ -12,7 +12,7 @@ public class Answer {
     @ApiModelProperty(name = "questionId",value = "题目编号")
     private Integer questionId;
 
-    @ApiModelProperty(name = "questionType",value = "题目类型")
+    @ApiModelProperty(name = "questionType",value = "题目类型 ")
     private Integer questionType;
 
     @ApiModelProperty(name = "studentAnswer",value = "学生回答")

@@ -3,19 +3,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.examination.mapper.FillQuestionMapper">
     <select id="findAll" resultType="com.examination.entity.FillQuestion">
-        select * from fill_question
+        select *
+        from fill_question
     </select>
 
     <select id="findByPaperId" resultType="com.examination.entity.FillQuestion">
-        select fq.* from fill_question fq,paper_manage pm where pm.questionType = 2 and pm.paperId = #{paperId} and fq.questionId=pm.questionId
+        select fq.*
+        from fill_question fq,paper_manage pm
+        where pm.questionType = 2 and pm.paperId = #{paperId} and fq.questionId=pm.questionId
     </select>
 
     <select id="findBySubject" resultType="Integer">
-        select questionId from fill_question where subject = #{subject}
+        select questionId
+        from fill_question
+        where subject = #{subject}
     </select>
 
     <select id="findByQuestionId" resultType="com.examination.entity.FillQuestion">
-        select * from fill_question where questionId = #{questionId}
+        select *
+        from fill_question
+        where questionId = #{questionId}
     </select>
 
     <insert id="add" parameterType="com.examination.entity.FillQuestion">

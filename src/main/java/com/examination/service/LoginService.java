@@ -11,7 +11,4 @@ public interface LoginService {
     Student studentLogin(Integer studentId, String password);
 
     Teacher teacherLogin(Integer teacherId, String password);
-
-
-
 }

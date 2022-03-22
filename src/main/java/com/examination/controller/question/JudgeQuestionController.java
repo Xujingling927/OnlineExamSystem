@@ -40,18 +40,18 @@ public class JudgeQuestionController {
     @LoginAuth
     @ApiOperation(value = "获取该试卷编号下的所有判断题")
     @ApiImplicitParam(name = "paperId",value = "试卷编号")
-    @GetMapping("/judgeQuestion")
-    public Result findById(@RequestParam("paperId") Integer paperId) {
+    @GetMapping("/judgeQuestion/{paperId}")
+    public Result findById(@PathVariable("paperId") Integer paperId) {
         List<JudgeQuestion> res = judgeQuestionService.findByPaperId(paperId);
         if (res.size()>0) return Result.success(res);
         else return Result.fail("查找失败",404);
     }
 
     @LoginAuth
-    @GetMapping("/judgeQuestion/")
+    @GetMapping("/judgeQuestion/{questionId}}")
     @ApiOperation("通过题目编号查找判断题")
     @ApiImplicitParam(name = "questionId",value = "题目编号")
-    public Result findByQuestionId(@RequestParam("questionId") Integer questionId){
+    public Result findByQuestionId(@PathVariable("questionId") Integer questionId){
         JudgeQuestion judgeQuestion = judgeQuestionService.findByQuestionId(questionId);
         if (judgeQuestion != null) return Result.success(judgeQuestion);
         else return Result.fail("查找题目失败",404);

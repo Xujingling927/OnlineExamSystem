@@ -41,10 +41,10 @@ public class FillQuestionController {
     }
 
     @LoginAuth
-    @GetMapping("/fillQuestion")
+    @GetMapping("/fillQuestion/{paperId}")
     @ApiOperation("根据试卷编号查找该试卷中的所有填空题")
     @ApiImplicitParam(name = "paperId",value = "试卷编号")
-    public Result findByPaperId(@RequestParam("paperId") Integer paperId){
+    public Result findByPaperId(@PathVariable("paperId") Integer paperId){
         List<FillQuestion> list = fillQuestionService.findByPaperId(paperId);
         if (!list.isEmpty()){
             return Result.success(list);
@@ -53,10 +53,10 @@ public class FillQuestionController {
     }
 
     @LoginAuth
-    @GetMapping("/fillQuestion/")
+    @GetMapping("/fillQuestion/{questionId}")
     @ApiOperation("根据题目编号查找填空题")
     @ApiImplicitParam(name = "questionId",value = "题目编号",dataTypeClass = Integer.class)
-    public Result findByQuestionId(@RequestParam("questionId") Integer questionId){
+    public Result findByQuestionId(@PathVariable("questionId") Integer questionId){
         FillQuestion fillQuestion = fillQuestionService.findByQuestionId(questionId);
         if (fillQuestion != null) return Result.success(fillQuestion);
         else return Result.fail("查找题目失败",404);

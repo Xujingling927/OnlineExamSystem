@@ -54,8 +54,8 @@ public class ExamManageController {
             @ApiResponse(code = 404,message = "没有找到该考试"),
             @ApiResponse(code = 200,message = "成功")
     })
-    @GetMapping("/exam/code")
-    public Result findByExamCode(@RequestParam("examCode") Integer examCode){
+    @GetMapping("/exam/code/{examCode}")
+    public Result findByExamCode(@PathVariable("examCode") Integer examCode){
         ExamManage examManage = examManageService.findByExamCode(examCode);
         if (examManage == null) return Result.fail("没有找到该考试",404);
         return Result.success(examManage);
@@ -69,8 +69,8 @@ public class ExamManageController {
             @ApiResponse(code = 404,message = "没有结果"),
             @ApiResponse(code = 200,message = "成功",responseContainer = "List")
     })
-    @GetMapping("/exam/paper")
-    public Result findByPaperId(Integer paperId){
+    @GetMapping("/exam/paper/{paperId}")
+    public Result findByPaperId(@PathVariable("paperId") Integer paperId){
         List<ExamManage> examManages = examManageService.findByPaperId(paperId);
         if (examManages.isEmpty()) return Result.fail("没有结果",404);
         return Result.success(examManages);

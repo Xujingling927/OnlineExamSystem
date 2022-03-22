@@ -9,6 +9,9 @@ spring:
       port: 6379
 
 
+
+
+
 mybatis:
   type-aliases-package: com.examination.entity
   mapper-locations: classpath:mapper/*.xml

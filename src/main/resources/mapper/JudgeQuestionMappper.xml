@@ -3,23 +3,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.examination.mapper.JudgeQuestionMapper">
     <select id="findAll" resultType="com.examination.entity.JudgeQuestion">
-        select * from judge_question
+        select *
+        from judge_question
     </select>
 
     <select id="findByPaperId" resultType="com.examination.entity.JudgeQuestion">
-        select jq.* from judge_question jq,paper_manage pm where pm.questionType = 2 and pm.paperId = #{paperId} and jq.questionId=pm.questionId
+        select jq.*
+        from judge_question jq,paper_manage pm
+        where pm.questionType = 2 and pm.paperId = #{paperId} and jq.questionId=pm.questionId
     </select>
 
     <select id="findByQuestionId" resultType="com.examination.entity.JudgeQuestion">
-        select * from exam.judge_question where questionId = #{questionId};
+        select * from exam.judge_question
+        where questionId = #{questionId};
     </select>
 
     <insert id="add" parameterType="com.examination.entity.JudgeQuestion">
         insert into judge_question (questionId,subject,question,answer,analysis,score,level,section)
-                                    value (#{questionId},#{subject},#{question},#{answer},#{analysis},#{score},#{level},#{section})
+        value (#{questionId},#{subject},#{question},#{answer},#{analysis},#{score},#{level},#{section})
     </insert>
 
     <select id="findBySubject" resultType="Integer">
-        select questionId from multi_question where subject = #{subject}
+        select questionId
+        from multi_question
+        where subject = #{subject}
     </select>
 </mapper>

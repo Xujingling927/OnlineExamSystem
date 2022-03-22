@@ -35,8 +35,8 @@ public class PaperManageController {
     @LoginAuth
     @ApiOperation(value = "根据试卷编号查找")
     @ApiImplicitParam(value = "试卷编号",name = "paperId")
-    @GetMapping("/paper")
-    public Result findById(@RequestParam("paperId") Integer paperId){
+    @GetMapping("/paper/{paperId}")
+    public Result findById(@PathVariable("paperId") Integer paperId){
         List<PaperManage> res = paperService.findById(paperId);
         if (!res.isEmpty()) return Result.success(res);
         return Result.fail("试卷查找失败",1003);

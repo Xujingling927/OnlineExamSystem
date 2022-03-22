@@ -7,16 +7,12 @@ import com.examination.service.ScoreService;
 import com.examination.service.question.FillQuestionService;
 import com.examination.service.question.JudgeQuestionService;
 import com.examination.service.question.MultiQuestionService;
-import com.sun.istack.internal.NotNull;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.text.SimpleDateFormat;
@@ -56,9 +52,9 @@ public class ExamController {
             @ApiImplicitParam(name = "answers",value = "答卷实体类",dataType = "Answer",allowMultiple = true)
     })
     @ApiOperation(value = "学生提交试卷")
-    @PostMapping("/exam/student")
-    public Result judge(@RequestParam("studentId") Integer studentId,
-                        @RequestParam("examCode") Integer examCode,
+    @PostMapping("/exam/{examCode}/student/{studentId}")
+    public Result judge(@PathVariable("studentId") Integer studentId,
+                        @PathVariable("examCode") Integer examCode,
                         @RequestBody List<Answer> answers){
         int scoreSum;//成绩总分
         int multiScore = 0;//选择题得分
@@ -90,7 +86,7 @@ public class ExamController {
         return Result.fail("提交失败",400);
     }
 
-    private int multiQuestionJudgement(Integer questionId,@NotNull String answer){
+    private int multiQuestionJudgement(Integer questionId, String answer){
         MultiQuestion origin =  multiQuestionService.findByQuestionId(questionId);
         if (origin ==null) return 0;
         if (origin.getRightAnswer().equals(answer)){
@@ -99,7 +95,7 @@ public class ExamController {
         return 0;
     }
 
-    private int fillQuestionJudgement(Integer questionId,@NotNull String answer){
+    private int fillQuestionJudgement(Integer questionId, String answer){
         FillQuestion origin = fillQuestionService.findByQuestionId(questionId);
         if (origin ==null) return 0;
         if (origin.getAnswer().trim().equals(answer.trim())){
@@ -108,7 +104,7 @@ public class ExamController {
         return 0;
     }
 
-    private int judgeQuestionJudgement(Integer questionId,@NotNull String answer){
+    private int judgeQuestionJudgement(Integer questionId, String answer){
         JudgeQuestion origin = judgeQuestionService.findByQuestionId(questionId);
         if (origin == null) return 0;
         if (origin.getAnswer().trim().equals(answer.trim())){

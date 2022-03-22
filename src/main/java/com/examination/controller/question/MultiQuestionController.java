@@ -30,17 +30,18 @@ public class MultiQuestionController {
     @AdminAuth
     @ApiOperation(value = "获取所有的的选择题",tags = "管理员权限")
     @GetMapping("/multiQuestions")
-    public Result findAll(@RequestParam("page") Integer page,@RequestParam("pageSize") Integer pageSize){
-        PageHelper.startPage(page,pageSize);
+    public Result findAll(){
+//        @RequestParam("page") Integer page,@RequestParam("pageSize") Integer pageSize
+//        PageHelper.startPage(page,pageSize);
         List<MultiQuestion> res = multiQuestionService.findAll();
         if (res.isEmpty()) return Result.fail("查找失败",404);
-        return Result.success(PageInfo.of(res));
+        return Result.success(res);
     }
 
     @LoginAuth
     @ApiOperation(value = "获取该试卷编号下的所有选择题")
     @ApiImplicitParam(name = "paperId",value = "试卷编号")
-    @GetMapping("/multiQuestion")
+    @GetMapping("/multiQuestion/{paperId}")
     public Result findById(@RequestParam Integer paperId) {
         List<MultiQuestion> res = multiQuestionService.findByPaperId(paperId);
         if (!res.isEmpty()) return Result.success(res);
@@ -48,10 +49,10 @@ public class MultiQuestionController {
     }
 
     @LoginAuth
-    @GetMapping("/multiQuestion/")
+    @GetMapping("/multiQuestion/{questionId}")
     @ApiOperation("通过题目编号获取选择题")
     @ApiImplicitParam(name = "questionId",value = "题目编号",dataTypeClass = Integer.class)
-    public Result findByQuestionId(@RequestParam("questionId") Integer questionId){
+    public Result findByQuestionId(@PathVariable("questionId") Integer questionId){
         MultiQuestion multiQuestion = multiQuestionService.findByQuestionId(questionId);
         if (multiQuestion != null) return Result.success(multiQuestion);
         else return Result.fail("查找题目失败",404);
