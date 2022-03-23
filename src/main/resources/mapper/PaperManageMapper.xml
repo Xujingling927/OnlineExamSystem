@@ -12,6 +12,11 @@
         from paper_manage
         where paperId = #{paperId}
     </select>
+    <select id="findByQuestionId" resultType="Integer">
+        select paperId
+        from exam.paper_manage
+        where questionId = #{questionId} and questionType = #{questionType}
+    </select>
 
     <insert id="add" parameterType="com.examination.entity.PaperManage">
         insert into paper_manage (paperId, questionType, questionId)

@@ -26,7 +26,7 @@ public class AdminController {
 
     @LoginAuth
     @ApiOperation("根据管理员编号查询")
-    @ApiImplicitParam(value = "管理员编号",name = "adminId")
+    @ApiImplicitParam(value = "管理员编号",name = "adminId",dataType = "Integer")
     @GetMapping("/admin/{adminId}")
     public Result findById(@PathVariable("adminId") Integer adminId){
         Admin admin = adminService.findById(adminId);
@@ -39,7 +39,7 @@ public class AdminController {
 
     @AdminAuth
     @ApiOperation(value = "根据管理员编号删除",tags = "管理员权限")
-    @ApiImplicitParam(value = "管理员编号",name = "adminId")
+    @ApiImplicitParam(value = "管理员编号",name = "adminId",dataType = "Integer")
     @DeleteMapping("/admin/{adminId}")
     public Result delete(@PathVariable("adminId") Integer adminId){
         int res = adminService.deleteById(adminId);

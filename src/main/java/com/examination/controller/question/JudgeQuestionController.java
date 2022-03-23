@@ -39,8 +39,8 @@ public class JudgeQuestionController {
 
     @LoginAuth
     @ApiOperation(value = "获取该试卷编号下的所有判断题")
-    @ApiImplicitParam(name = "paperId",value = "试卷编号")
-    @GetMapping("/judgeQuestion/{paperId}")
+    @ApiImplicitParam(name = "paperId",value = "试卷编号",dataType = "Integer")
+    @GetMapping("/judgeQuestion/paper/{paperId}")
     public Result findById(@PathVariable("paperId") Integer paperId) {
         List<JudgeQuestion> res = judgeQuestionService.findByPaperId(paperId);
         if (res.size()>0) return Result.success(res);
@@ -48,9 +48,9 @@ public class JudgeQuestionController {
     }
 
     @LoginAuth
-    @GetMapping("/judgeQuestion/{questionId}}")
+    @GetMapping("/judgeQuestion/question/{questionId}}")
     @ApiOperation("通过题目编号查找判断题")
-    @ApiImplicitParam(name = "questionId",value = "题目编号")
+    @ApiImplicitParam(name = "questionId",value = "题目编号",dataType = "Integer")
     public Result findByQuestionId(@PathVariable("questionId") Integer questionId){
         JudgeQuestion judgeQuestion = judgeQuestionService.findByQuestionId(questionId);
         if (judgeQuestion != null) return Result.success(judgeQuestion);

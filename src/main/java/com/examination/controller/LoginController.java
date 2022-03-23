@@ -1,18 +1,30 @@
 package com.examination.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.examination.component.LoginAuth;
 import com.examination.entity.*;
 import com.examination.service.impl.LoginServiceImpl;
-import com.examination.util.RedisUtil;
 import com.examination.util.TokenGenerator;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.concurrent.TimeUnit;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
+import static com.examination.util.TokenGenerator.SECRET;
 
+@Slf4j
 @Api(tags = "登陆接口")
 @RestController
 public class LoginController {
@@ -75,7 +87,30 @@ public class LoginController {
         return Result.fail("登陆失败", 1002);
     }
 
-
+    @LoginAuth
+    @ApiImplicitParam(name = "login",value = "验证信息",dataType = "Login")
+    @PostMapping("/login-check")
+    public Result loginCheck(HttpServletRequest httpServletRequest, @RequestBody Login login){
+        String token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
+        Integer userId = login.getUserId();
+        Integer role = login.getRole();
+        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
+        boolean status = false;
+        try {
+            log.info("userId = {},role = {}",userId,role);
+            Integer role_auth = jwtVerifier.verify(token).getClaim("role").asInt();
+            Integer userId_auth = jwtVerifier.verify(token).getClaim("userId").asInt();
+            log.info("userId_auth = {},role_auth = {}",userId_auth,role_auth);
+            if (Objects.equals(role_auth, role) && Objects.equals(userId_auth, userId)){
+                log.info("校验成功");
+                status = true;
+            }
+        } catch (JWTVerificationException e) {
+            log.info("Verify Token: invalid token");
+        }
+        if (status) return Result.success();
+        else return Result.fail("unauthorized",401);
+    }
 
 
 }

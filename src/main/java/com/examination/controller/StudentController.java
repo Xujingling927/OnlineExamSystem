@@ -30,8 +30,8 @@ public class StudentController {
     @AdminAuth
     @ApiOperation(value = "查询所有学生信息",tags = "管理员权限")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page",value = "当前页数",dataTypeClass = Integer.class),
-            @ApiImplicitParam(name = "pageSize",value = "最大页面",dataTypeClass = Integer.class)})
+            @ApiImplicitParam(name = "page",value = "当前页数",dataType = "Integer"),
+            @ApiImplicitParam(name = "pageSize",value = "最大页面",dataType = "Integer")})
     @GetMapping("/students")
     public Result findAll(@RequestParam("page") Integer page,@RequestParam("pageSize") Integer pageSize) {
         PageHelper.startPage(page,pageSize);
@@ -41,7 +41,7 @@ public class StudentController {
 
     @LoginAuth
     @ApiOperation("根据学生编号查询")
-    @ApiImplicitParam(value = "学生编号",name = "studentId")
+    @ApiImplicitParam(value = "学生编号",name = "studentId",dataType = "Integer")
     @ApiResponse(code = 200,message = "查找成功")
     @GetMapping("/student/{studentId}")
     public Result findById(@PathVariable("studentId") Integer studentId){

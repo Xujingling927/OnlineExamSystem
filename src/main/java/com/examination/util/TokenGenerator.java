@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class TokenGenerator {
     private static final long EXPIRE_TIME =  24 * 60 * 60 * 1000;
-    private static final String  SECRET = "b29e4761c245a820965fcfaf2df75cffcfe8b64e2a26e52ae48e6aeda2eb7c5d";
+    public static final String  SECRET = "b29e4761c245a820965fcfaf2df75cffcfe8b64e2a26e52ae48e6aeda2eb7c5d";
 
     public static void main(String[] args) {
         System.out.println(JWT.create()

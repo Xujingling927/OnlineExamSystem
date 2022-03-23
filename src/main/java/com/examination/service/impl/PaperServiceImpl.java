@@ -31,4 +31,9 @@ public class PaperServiceImpl implements PaperService {
     public List<PaperManage> findById(Integer paperId) {
         return paperManageMapper.findById(paperId);
     }
+
+    @Override
+    public List<Integer> findByQuestionId(Integer questionId,Integer questionType) {
+        return paperManageMapper.findByQuestionId(questionId,questionType);
+    }
 }

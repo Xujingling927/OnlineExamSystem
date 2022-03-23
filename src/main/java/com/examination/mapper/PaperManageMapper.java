@@ -11,5 +11,7 @@ public interface PaperManageMapper {
 
     List<PaperManage> findById(Integer paperId);
 
+    List<Integer> findByQuestionId(Integer questionId,Integer questionType);
+
     int add(PaperManage paperManage);
 }

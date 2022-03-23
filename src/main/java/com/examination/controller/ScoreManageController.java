@@ -42,7 +42,7 @@ public class ScoreManageController {
     //查询该场考试所有学生的成绩
     @LoginAuth
     @ApiOperation("查询该场考试所有学生的成绩")
-    @ApiImplicitParam(name = "examCode",value = "考试编号")
+    @ApiImplicitParam(name = "examCode",value = "考试编号",dataType = "Integer")
     @ApiResponses({
             @ApiResponse(code = 404,message = "未找到任何结果"),
             @ApiResponse(code = 200,message = "成功")

@@ -6,9 +6,12 @@ import java.util.List;
 
 public interface PaperService {
 
-    public int add(PaperManage paperManage);
+    int add(PaperManage paperManage);
 
-    public List<PaperManage> findAll();
+    List<PaperManage> findAll();
 
-    public List<PaperManage> findById(Integer paperId);
+    List<PaperManage> findById(Integer paperId);
+
+    List<Integer> findByQuestionId(Integer questionId,Integer questionType);
+
 }

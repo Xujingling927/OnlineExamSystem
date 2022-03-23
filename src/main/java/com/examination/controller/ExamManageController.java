@@ -4,25 +4,32 @@ import com.examination.component.AdminAuth;
 import com.examination.component.LoginAuth;
 import com.examination.controller.common.BaseController;
 import com.examination.entity.ExamManage;
+import com.examination.entity.PaperManage;
 import com.examination.entity.Result;
 import com.examination.service.ExamManageService;
+import com.examination.service.PaperService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Api(tags = "考试管理接口")
 @RestController
 public class ExamManageController {
     ExamManageService examManageService;
+    PaperService paperService;
+
 
     @Autowired
-    public ExamManageController(ExamManageService examManageService) {
+    public ExamManageController(ExamManageService examManageService, PaperService paperService) {
         this.examManageService = examManageService;
+        this.paperService = paperService;
     }
+
 
 
 //    public Result findAll(){
@@ -64,7 +71,7 @@ public class ExamManageController {
 
     @LoginAuth
     @ApiOperation(value = "通过试卷编号查询有哪些考试使用了该套试卷")
-    @ApiImplicitParam(name = "paperId",value = "试卷编号")
+    @ApiImplicitParam(name = "paperId",value = "试卷编号",dataType = "Integer")
     @ApiResponses({
             @ApiResponse(code = 404,message = "没有结果"),
             @ApiResponse(code = 200,message = "成功",responseContainer = "List")
@@ -94,7 +101,7 @@ public class ExamManageController {
 
     @AdminAuth
     @ApiOperation(value = "通过试卷编号删除",notes = "可以批量删除")
-    @ApiImplicitParam(name = "list" ,value = "试卷编号")
+    @ApiImplicitParam(name = "list" ,value = "试卷编号",dataType = "Integer")
     @ApiResponses({
             @ApiResponse(code = BaseController.DELETE_FAIL,message = "删除失败"),
             @ApiResponse(code = 200,message = "已成功删除XX个考试")
@@ -109,5 +116,23 @@ public class ExamManageController {
             return Result.fail("删除失败",BaseController.DELETE_FAIL);
         }
         else return Result.successMs("已成功删除"+count+"个考试");
+    }
+
+    //用 questionId 获取哪些考试使用到了这个题目
+    @LoginAuth
+    @ApiOperation("获取哪些考试使用到了这个题目")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "questionId",value = "题目编号",dataType = "Integer"),
+            @ApiImplicitParam(name = "type",value = "类型",dataType = "Integer")
+    })
+    @GetMapping("/exam/question/{questionId}/type/{type}")
+    public Result findByQuestionId(Integer questionId,Integer type){
+        List<Integer> paperIdList = paperService.findByQuestionId(questionId,type);
+        List<ExamManage> res =  new ArrayList<>();
+        for (Integer paperId:paperIdList){
+            res.addAll(examManageService.findByPaperId(paperId));
+        }
+        if (res.isEmpty()) return Result.fail("没有找到任何结果",404);
+        return Result.success(res);
     }
 }

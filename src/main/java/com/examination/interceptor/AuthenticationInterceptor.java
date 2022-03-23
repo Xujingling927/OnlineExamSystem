@@ -24,10 +24,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 
+import static com.examination.util.TokenGenerator.SECRET;
+
 @Slf4j
 public class AuthenticationInterceptor implements HandlerInterceptor {
-
-    private static final String  SECRET = "b29e4761c245a820965fcfaf2df75cffcfe8b64e2a26e52ae48e6aeda2eb7c5d";
 
     @Autowired
     AdminService adminService;

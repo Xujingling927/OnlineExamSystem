@@ -40,8 +40,8 @@ public class MultiQuestionController {
 
     @LoginAuth
     @ApiOperation(value = "获取该试卷编号下的所有选择题")
-    @ApiImplicitParam(name = "paperId",value = "试卷编号")
-    @GetMapping("/multiQuestion/{paperId}")
+    @ApiImplicitParam(name = "paperId",value = "试卷编号",dataType = "Integer")
+    @GetMapping("/multiQuestion/paper/{paperId}")
     public Result findById(@RequestParam Integer paperId) {
         List<MultiQuestion> res = multiQuestionService.findByPaperId(paperId);
         if (!res.isEmpty()) return Result.success(res);
@@ -49,9 +49,9 @@ public class MultiQuestionController {
     }
 
     @LoginAuth
-    @GetMapping("/multiQuestion/{questionId}")
+    @GetMapping("/multiQuestion/question/{questionId}")
     @ApiOperation("通过题目编号获取选择题")
-    @ApiImplicitParam(name = "questionId",value = "题目编号",dataTypeClass = Integer.class)
+    @ApiImplicitParam(name = "questionId",value = "题目编号",dataType = "Integer")
     public Result findByQuestionId(@PathVariable("questionId") Integer questionId){
         MultiQuestion multiQuestion = multiQuestionService.findByQuestionId(questionId);
         if (multiQuestion != null) return Result.success(multiQuestion);

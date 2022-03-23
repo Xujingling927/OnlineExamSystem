@@ -34,7 +34,7 @@ public class PaperManageController {
 
     @LoginAuth
     @ApiOperation(value = "根据试卷编号查找")
-    @ApiImplicitParam(value = "试卷编号",name = "paperId")
+    @ApiImplicitParam(value = "试卷编号",name = "paperId",dataType = "Integer")
     @GetMapping("/paper/{paperId}")
     public Result findById(@PathVariable("paperId") Integer paperId){
         List<PaperManage> res = paperService.findById(paperId);
