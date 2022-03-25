@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Objects;
 
 import static com.examination.util.TokenGenerator.SECRET;
@@ -90,7 +92,7 @@ public class LoginController {
     @LoginAuth
     @ApiImplicitParam(name = "login",value = "验证信息",dataType = "Login")
     @PostMapping("/login-check")
-    public Result loginCheck(HttpServletRequest httpServletRequest, @RequestBody Login login){
+    public Result loginCheck(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody Login login) throws IOException {
         String token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
         Integer userId = login.getUserId();
         Integer role = login.getRole();
@@ -108,8 +110,9 @@ public class LoginController {
         } catch (JWTVerificationException e) {
             log.info("Verify Token: invalid token");
         }
-        if (status) return Result.success();
-        else return Result.fail("unauthorized",401);
+        if (status) return Result.successMs("");
+        else httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        return null;
     }
 
 

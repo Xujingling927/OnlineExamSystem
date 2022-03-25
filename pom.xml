@@ -18,7 +18,7 @@
         <skipTests>true</skipTests>
     </properties>
     <dependencies>
-<!--        SpringBoot框架-->
+<!--        SpringBoot 核心框架-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -44,11 +44,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        模板引擎-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-thymeleaf</artifactId>-->
-<!--        </dependency>-->
 <!--        Swagger 组件 -->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -60,27 +55,11 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
         </dependency>
-
 <!--        lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-
-<!--        Junit-->
-<!--        <dependency>-->
-<!--            <groupId>org.junit.jupiter</groupId>-->
-<!--            <artifactId>junit-jupiter-api</artifactId>-->
-<!--            <version>5.8.2</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-<!--        Gson-->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.9.0</version>
-        </dependency>
-
         <!--        Log4j-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -98,24 +77,23 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.4.1</version>
         </dependency>
-
+<!--        Redis 连接-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+<!--        junit-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
+<!--        jwt-->
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>3.18.3</version>
         </dependency>
-
-
     </dependencies>
 
 

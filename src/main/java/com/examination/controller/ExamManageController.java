@@ -126,7 +126,7 @@ public class ExamManageController {
             @ApiImplicitParam(name = "type",value = "类型",dataType = "Integer")
     })
     @GetMapping("/exam/question/{questionId}/type/{type}")
-    public Result findByQuestionId(Integer questionId,Integer type){
+    public Result findByQuestionId(@PathVariable("questionId") Integer questionId,@PathVariable("type") Integer type){
         List<Integer> paperIdList = paperService.findByQuestionId(questionId,type);
         List<ExamManage> res =  new ArrayList<>();
         for (Integer paperId:paperIdList){
