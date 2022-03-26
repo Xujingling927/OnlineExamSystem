@@ -67,10 +67,10 @@ public class ScoreManageController {
             @ApiResponse(code = 200,message = "成功")
     })
     @GetMapping("/scores")
-    public Result findAll(@RequestParam("page") Integer page,@RequestParam("pageSize") Integer pageSzie){
+    public Result findAll(@RequestParam("page") Integer page,@RequestParam("pageSize") Integer pageSize){
+        PageHelper.startPage(page,pageSize);
         List<Score> res = scoreService.findAll();
         if (res.isEmpty()) return Result.fail("未找到任何结果",404);
-        PageHelper.startPage(page,pageSzie);
         return Result.success(PageInfo.of(res));
     }
 
