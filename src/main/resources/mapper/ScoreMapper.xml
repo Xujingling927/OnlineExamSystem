@@ -19,7 +19,7 @@
 
     <select id="findAll" resultType="com.examination.entity.Score">
         select *
-        from exam.score;
+        from exam.score
     </select>
 
     <select id="findByStudentId" resultType="com.examination.entity.Score">
