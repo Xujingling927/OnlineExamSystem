@@ -39,8 +39,9 @@ public class ExamManageController {
 //    }
     @LoginAuth
     @ApiOperation(value = "查询所有考试")
-    @ApiImplicitParams({@ApiImplicitParam(name = "page",value = "当前页数"),
-    @ApiImplicitParam(name = "pageSize",value = "页面大小")})
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page",value = "当前页数",defaultValue = "1"),
+            @ApiImplicitParam(name = "pageSize",value = "页面大小",defaultValue = "10")})
     @ApiResponses({
             @ApiResponse(code = 404, message = "目前还没有考试"),
             @ApiResponse(code = 200, message = "成功")

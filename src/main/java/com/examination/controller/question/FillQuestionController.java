@@ -33,8 +33,8 @@ public class FillQuestionController {
     @GetMapping("/fillQuestions")
     @ApiOperation("查找题库中所有填空题")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page",value = "当前页数"),
-            @ApiImplicitParam(name = "pageSize",value = "页面大小")})
+            @ApiImplicitParam(name = "page",value = "当前页数",defaultValue = "1"),
+            @ApiImplicitParam(name = "pageSize",value = "页面大小",defaultValue = "10")})
     public Result findAll(@RequestParam("page") Integer page,@RequestParam("pageSize") Integer pageSize){
         PageHelper.startPage(page,pageSize);
         return Result.success(PageInfo.of(fillQuestionService.findAll()));

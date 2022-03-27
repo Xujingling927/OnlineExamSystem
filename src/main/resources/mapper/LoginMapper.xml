@@ -5,19 +5,19 @@
     <select id="adminLogin" resultType="com.examination.entity.Admin">
         select *
         from admin
-        where adminId = #{adminId} and pwd = #{password};
+        where adminId = #{adminId} and pwd = #{password}
     </select>
 
     <select id="studentLogin" resultType="com.examination.entity.Student" >
         select *
         from student
-        where studentId = #{studentId} and pwd = #{password};
+        where studentId = #{studentId} and pwd = #{password}
     </select>
 
     <select id="teacherLogin" resultType="com.examination.entity.Teacher">
         select *
         from teacher
-        where teacherId = #{teacherId} and pwd = #{password};
+        where teacherId = #{teacherId} and pwd = #{password}
     </select>
 
 </mapper>

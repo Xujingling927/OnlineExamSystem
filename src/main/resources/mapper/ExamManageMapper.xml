@@ -14,7 +14,7 @@
 
     <select id="findByPaperId" resultType="com.examination.entity.ExamManage">
         select *
-        from exam_manage where paperId = #{paperId} ;
+        from exam_manage where paperId = #{paperId}
     </select>
 
     <delete id="delete" parameterType="Integer">

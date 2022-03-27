@@ -15,7 +15,7 @@
 
     <select id="findByQuestionId" resultType="com.examination.entity.JudgeQuestion">
         select * from exam.judge_question
-        where questionId = #{questionId};
+        where questionId = #{questionId}
     </select>
 
     <insert id="add" parameterType="com.examination.entity.JudgeQuestion">

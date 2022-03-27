@@ -30,6 +30,6 @@
     <select id="findByExamCode" resultType="com.examination.entity.Score">
         select *
         from score
-        where examCode = #{examCode};
+        where examCode = #{examCode}
     </select>
 </mapper>

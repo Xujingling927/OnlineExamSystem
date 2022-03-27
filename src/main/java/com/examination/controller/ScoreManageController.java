@@ -59,8 +59,8 @@ public class ScoreManageController {
     @AdminAuth
     @ApiOperation("查找所有成绩")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "pageSize",value = "页面大小"),
-        @ApiImplicitParam(name = "page",value = "当前页数")
+        @ApiImplicitParam(name = "pageSize",value = "页面大小",defaultValue = "10"),
+        @ApiImplicitParam(name = "page",value = "当前页数",defaultValue = "1")
     })
     @ApiResponses({
             @ApiResponse(code = 404,message = "未找到任何结果"),
