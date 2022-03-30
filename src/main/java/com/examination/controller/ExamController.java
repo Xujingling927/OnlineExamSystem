@@ -86,6 +86,12 @@ public class ExamController {
         return Result.fail("提交失败",400);
     }
 
+    /**
+     * 选择题得分统计
+     * @param questionId 题目编号
+     * @param answer 回答
+     * @return 得分
+     */
     private int multiQuestionJudgement(Integer questionId, String answer){
         MultiQuestion origin =  multiQuestionService.findByQuestionId(questionId);
         if (origin ==null) return 0;
@@ -95,6 +101,13 @@ public class ExamController {
         return 0;
     }
 
+
+    /**
+     * 填空题得分统计
+     * @param questionId 题目编号
+     * @param answer 回答
+     * @return 得分
+     */
     private int fillQuestionJudgement(Integer questionId, String answer){
         FillQuestion origin = fillQuestionService.findByQuestionId(questionId);
         if (origin ==null) return 0;
@@ -104,6 +117,12 @@ public class ExamController {
         return 0;
     }
 
+    /**
+     * 填空题得分统计
+     * @param questionId 题目编号
+     * @param answer 回答
+     * @return 得分
+     */
     private int judgeQuestionJudgement(Integer questionId, String answer){
         JudgeQuestion origin = judgeQuestionService.findByQuestionId(questionId);
         if (origin == null) return 0;

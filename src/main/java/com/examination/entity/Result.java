@@ -1,5 +1,6 @@
 package com.examination.entity;
 
+import com.examination.controller.common.ResultEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

@@ -18,4 +18,7 @@ public interface ExamManageMapper {
     int add(ExamManage exammanage);
 
     List<ExamManage> findByPaperId(Integer paperId);
+
+    List<ExamManage> findByStudentId(Integer studentId);
+
 }

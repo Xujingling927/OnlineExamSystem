@@ -48,7 +48,7 @@ public class JudgeQuestionController {
     }
 
     @LoginAuth
-    @GetMapping("/judgeQuestion/question/{questionId}}")
+    @GetMapping("/judgeQuestion/question/{questionId}")
     @ApiOperation("通过题目编号查找判断题")
     @ApiImplicitParam(name = "questionId",value = "题目编号",dataType = "Integer")
     public Result findByQuestionId(@PathVariable("questionId") Integer questionId){

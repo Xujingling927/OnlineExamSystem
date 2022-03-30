@@ -119,6 +119,7 @@
                     <include>**/*.xml</include>
                     <include>**/*.yaml</include>
                     <include>**/*.txt</include>
+                    <include>**/*.csv</include>
                 </includes>
             </resource>
         </resources>

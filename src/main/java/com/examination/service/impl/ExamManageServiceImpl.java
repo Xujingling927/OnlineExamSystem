@@ -47,5 +47,8 @@ public class ExamManageServiceImpl implements ExamManageService {
         return examManageMapper.findByPaperId(paperId);
     }
 
-
+    @Override
+    public List<ExamManage> findByStudentId(Integer studentId) {
+        return examManageMapper.findByStudentId(studentId);
+    }
 }

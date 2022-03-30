@@ -3,6 +3,7 @@ package com.examination.controller;
 import com.examination.component.AdminAuth;
 import com.examination.component.LoginAuth;
 import com.examination.controller.common.BaseController;
+import com.examination.controller.common.ResultEnum;
 import com.examination.entity.Admin;
 import com.examination.entity.Result;
 import com.examination.service.impl.AdminServiceImpl;
@@ -26,14 +27,14 @@ public class AdminController {
 
     @LoginAuth
     @ApiOperation("根据管理员编号查询")
-    @ApiImplicitParam(value = "管理员编号",name = "adminId",dataType = "Integer")
+    @ApiImplicitParam(value = "管理员编号",name = "adminId",dataType = "Integer",defaultValue = "88888")
     @GetMapping("/admin/{adminId}")
     public Result findById(@PathVariable("adminId") Integer adminId){
         Admin admin = adminService.findById(adminId);
         if (admin != null){
             return Result.success(admin);
         }else {
-            return Result.fail("管理员不存在", BaseController.ADMIN_DO_NOT_EXIST);
+            return Result.fail("找不到管理员",BaseController.ADMIN_DO_NOT_EXIST);
         }
     }
 

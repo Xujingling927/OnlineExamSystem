@@ -17,6 +17,12 @@
         from exam_manage where paperId = #{paperId}
     </select>
 
+    <select id="findByStudentId" resultType="com.examination.entity.ExamManage">
+        select em.*
+        from exam_manage em,exam_student es
+        where es.studentId = #{student} and es.examCode = em.examCode and es.isComplete = false;
+    </select>
+
     <delete id="delete" parameterType="Integer">
         delete
         from exam_manage

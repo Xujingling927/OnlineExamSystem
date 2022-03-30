@@ -4,10 +4,8 @@ import com.examination.entity.FillQuestion;
 import com.examination.entity.JudgeQuestion;
 import com.examination.entity.MultiQuestion;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,14 +14,21 @@ public class CSVReader {
 
     public static String[] readLine(String file){
         ArrayList<String> res = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+            BufferedReader br = new BufferedReader(isr);
             String line = "";
             while ((line = br.readLine()) != null) {
                 res.add(line);
             }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return  res.toArray(new String[0]);
     }
 

@@ -2,6 +2,7 @@ package com.examination.controller;
 
 import com.examination.component.AdminAuth;
 import com.examination.component.LoginAuth;
+import com.examination.entity.ExamManage;
 import com.examination.service.StudentService;
 import com.examination.controller.common.BaseController;
 import com.examination.entity.Result;

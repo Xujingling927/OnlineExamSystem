@@ -29,7 +29,7 @@ class StudentControllerTest {
     @Test
     void findAll() throws Exception {
         String url = "/students?page={page}&pageSize={pageSize}";
-        mockMvc.perform(MockMvcRequestBuilders.get(url,"1","5"))
+        mockMvc.perform(MockMvcRequestBuilders.get(url,"1","10"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();

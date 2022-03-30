@@ -136,4 +136,14 @@ public class ExamManageController {
         if (res.isEmpty()) return Result.fail("没有找到任何结果",404);
         return Result.success(res);
     }
+
+    @LoginAuth
+    @ApiOperation("通过学生编号来查找该学生待完成的考试")
+    @ApiImplicitParam(name = "studentId",value = "学生编号")
+    @GetMapping("/exam/student/{studentId}")
+    public Result findByStudentId(@PathVariable Integer studentId){
+        List<ExamManage> res = examManageService.findByStudentId(studentId);
+        if (res.isEmpty()) return Result.successMs("没有要完成的考试哦");
+        return Result.success(res);
+    }
 }
