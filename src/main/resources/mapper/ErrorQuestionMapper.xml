@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.examination.mapper.ErrorQuestionMapper">
+
+    <insert id="add">
+        insert into error_question (studentId, studentAnswer, questionType, questionId)
+        VALUE (#{studentId}, #{studentAnswer}, #{questionType}, #{questionId})
+    </insert>
+
+    <update id="setStatus">
+        update error_question set status = !status where errorId = #{errorId}
+    </update>
+
+    <delete id="delete">
+        delete from error_question where errorId = #{errorId}
+    </delete>
+
+    <select id="findByStudentId" resultType="com.examination.entity.ErrorQuestion">
+        select * from error_question where studentId = #{studentId}
+    </select>
+</mapper>

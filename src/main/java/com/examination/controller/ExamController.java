@@ -4,6 +4,7 @@ import com.examination.component.LoginAuth;
 import com.examination.entity.*;
 import com.examination.service.ExamManageService;
 import com.examination.service.ScoreService;
+import com.examination.service.question.ErrorQuestionService;
 import com.examination.service.question.FillQuestionService;
 import com.examination.service.question.JudgeQuestionService;
 import com.examination.service.question.MultiQuestionService;
@@ -28,6 +29,10 @@ public class ExamController {
     FillQuestionService fillQuestionService;
     ExamManageService examManageService;
     ScoreService scoreService;
+    ErrorQuestionService errorQuestionService;
+
+    private Integer studentId;
+    private Integer examCode;
 
     @Autowired
     public ExamController(
@@ -35,12 +40,14 @@ public class ExamController {
             JudgeQuestionService judgeQuestionService,
             FillQuestionService fillQuestionService,
             ExamManageService examManageService,
-            ScoreService scoreService) {
+            ScoreService scoreService,
+            ErrorQuestionService errorQuestionService) {
         this.multiQuestionService = multiQuestionService;
         this.judgeQuestionService = judgeQuestionService;
         this.fillQuestionService = fillQuestionService;
         this.examManageService = examManageService;
         this.scoreService = scoreService;
+        this.errorQuestionService = errorQuestionService;
     }
 
 
@@ -56,6 +63,8 @@ public class ExamController {
     public Result judge(@PathVariable("studentId") Integer studentId,
                         @PathVariable("examCode") Integer examCode,
                         @RequestBody List<Answer> answers){
+        this.studentId = studentId;
+        this.examCode = examCode;
         int scoreSum;//成绩总分
         int multiScore = 0;//选择题得分
         int fillScore = 0;//填空题得分
@@ -98,6 +107,7 @@ public class ExamController {
         if (origin.getRightAnswer().equals(answer)){
             return origin.getScore();
         }
+        errorQuestionService.add(studentId,questionId,1,answer);
         return 0;
     }
 
@@ -114,6 +124,7 @@ public class ExamController {
         if (origin.getAnswer().trim().equals(answer.trim())){
             return origin.getScore();
         }
+        errorQuestionService.add(studentId,questionId,2,answer);
         return 0;
     }
 
@@ -129,6 +140,7 @@ public class ExamController {
         if (origin.getAnswer().trim().equals(answer.trim())){
             return origin.getScore();
         }
+        errorQuestionService.add(studentId,questionId,2,answer);
         return 0;
     }
 }
